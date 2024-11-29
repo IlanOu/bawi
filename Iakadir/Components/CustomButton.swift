@@ -9,23 +9,21 @@ import SwiftUI
 
 struct CustomButton: View {
     var title: String
-    var backgroundColor: Color
-    var foregroundColor: Color
+    var backgroundColor: Color = Color(hex: "#FD8450")
+    var foregroundColor: Color = .white
     
     var body: some View {
         Text(title) // Texte du bouton
             .fontWeight(.bold)
-            .font(.title2)
+            .font(.title)
             .foregroundColor(foregroundColor)
             .frame(maxWidth: .infinity)
-            .padding(.all, 24)
+            .padding(.vertical, 30)
             .background(backgroundColor)
-            .cornerRadius(24)
-            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
-            .padding(.vertical, 10)
+            .cornerRadius(50)
     }
 }
 
 #Preview {
-    CustomButton(title: "Commencer", backgroundColor: .white, foregroundColor: .black)
+    CustomButton(title: "Me connecter")
 }

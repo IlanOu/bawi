@@ -11,29 +11,13 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Gradient radial 1
-                RadialGradient(
-                    gradient: Gradient(colors: [
-                        Color.purple.opacity(0.9),
-                        Color.black.opacity(0.9)
-                    ]),
-                    center: .bottomLeading,
-                    startRadius: 5,
-                    endRadius: 500
-                )
-                .ignoresSafeArea()
                 
-                // Gradient radial 2
-                RadialGradient(
-                    gradient: Gradient(colors: [
-                        Color.indigo.opacity(0.2),
-                        Color.black.opacity(0)
-                    ]),
-                    center: .topTrailing,
-                    startRadius: 1,
-                    endRadius: 400
-                )
-                .ignoresSafeArea()
+                Image("Group 1") // Add this image to your assets
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .foregroundColor(Color(red: 0.6, green: 0.3, blue: 0.2)) // Brown-ish color for the lines
+                    .opacity(0.3)
+                    .ignoresSafeArea()
                 
                 VStack {
                     Spacer()
@@ -49,12 +33,13 @@ struct LoginView: View {
                     Spacer()
                     
                     // Titre
-                    Text("Ton assistant IA, au quotidien")
+                    Text("Ton assistant cuisine")
                         .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .fontWeight(.black)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
+                        .textCase(.uppercase)
                     
                     Spacer()
                     
@@ -62,11 +47,7 @@ struct LoginView: View {
                     NavigationLink(
                         destination: HomeView(),
                         label: {
-                            CustomButton(
-                                title: "Commencer",
-                                backgroundColor: .white,
-                                foregroundColor: .black
-                            )
+                            CustomButton(title: "C'est parti !")
                         }
                     )
                     
@@ -74,6 +55,7 @@ struct LoginView: View {
                 }
                 .padding()
             }
+            .background(Color(hex: "#231D1C"))
         }
     }
 }
