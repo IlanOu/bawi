@@ -1,70 +1,131 @@
 import SwiftUI
 
 struct CookingView: View {
+    @State private var selectedTab: Int = 0 // Suivi de l'onglet sélectionné
     @State private var selectedImage: UIImage? = nil
     @State private var showImagePicker: Bool = false
     @State private var selectedFoods: [String] = []
     @State private var filters: Filters = Filters()
     @State private var isLoading: Bool = false
-
+    @State private var isPhoto = false
+    
     var body: some View {
-        VStack {
-            // Section 1: Photo ou sélection d'aliments
-            Section(header: Text("Aliments").font(.headline)) {
-                HStack {
-                    Button(action: { showImagePicker = true }) {
-                        if let image = selectedImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(8)
+        ZStack {
+            Image("Group 1")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .opacity(0.3)
+                .ignoresSafeArea()
+                .clipped()
+            
+            VStack {
+                
+                // Contenu de la vue en fonction de l'onglet sélectionné
+                if selectedTab == 0 {
+                    
+                    Text("Dans mon frigo \nil y a...")
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .multilineTextAlignment(.center)
+                    
+                    // Onglet 1 : Photo ou sélection des aliments
+                    VStack {
+                        Toggle("Je veux prendre une photo !", isOn: $isPhoto)
+                            .padding(.vertical, 20)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        
+                        
+                        if isPhoto {
+                            Button(action: { showImagePicker = true }) {
+                                if let image = selectedImage {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
+                                        .cornerRadius(8)
+                                    
+                                } else {
+                                    VStack {
+                                        Spacer()
+                                        Image(systemName: "camera.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .font(.title)
+                                            .foregroundColor(Color("secondary"))
+                                            .frame(width: 100, height: 100)
+                                        
+                                        Text("Sélectionner une image")
+                                        Spacer()
+                                    }
+                                }
+                            }
+                            .sheet(isPresented: $showImagePicker) {
+                                ImagePicker(selectedImage: $selectedImage)
+                            }
                         } else {
-                            Image(systemName: "camera")
-                                .font(.title)
-                                .foregroundColor(.blue)
-                                .frame(width: 100, height: 100)
+                            ScrollView {
+                                FoodListView(selectedFoods: $selectedFoods)
+                            }
                         }
                     }
-                    .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(selectedImage: $selectedImage)
+                } else if selectedTab == 1 {
+                    // Onglet 2 : Filtres
+                    
+                    Text("Je vais faire \nà manger pour...")
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .multilineTextAlignment(.center)
+                    
+                    Spacer()
+                    
+                    VStack {
+                        FilterView(filters: $filters)
                     }
                     
-                    VStack(alignment: .leading) {
-                        Text("Sélectionner des aliments :")
-                            .font(.subheadline)
-                        FoodListView(selectedFoods: $selectedFoods)
+                    Spacer()
+                
+                    VStack {
+                        Button(action: { sendRequestToAPI() }) {
+                            if isLoading{
+                                CustomButton(title: "Attends, ça charge...")
+                            }else{
+                                CustomButton(title: "Cuisinons !")
+                            }
+                            
+                        }
+                        .disabled(isLoading)
                     }
                 }
-            }
-            .padding()
-
-            // Section 2: Filtres
-            Section(header: Text("Filtres").font(.headline)) {
-                FilterView(filters: $filters)
-            }
-            .padding()
-
-            // Section 3: Bouton de validation
-            Button(action: { sendRequestToAPI() }) {
+                
+                Spacer()
+                
+                // Personnalisation de la barre d'onglets
                 HStack {
-                    if isLoading {
-                        ProgressView()
-                    } else {
-                        Text("Trouver des recettes")
-                            .fontWeight(.bold)
+                    // Onglet 1
+                    Button(action: { selectedTab = 0 }) {
+                        Text("Aliments")
+                            .foregroundColor(selectedTab == 0 ? .blue : .gray) // Couleur dynamique
                     }
+                    .padding()
+                    
+                    // Onglet 2
+                    Button(action: { selectedTab = 1 }) {
+                        Text("Filtres")
+                            .foregroundColor(selectedTab == 1 ? .blue : .gray) // Couleur dynamique
+                    }
+                    .padding()
+                   
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
+                .background(Color.white)
+                .cornerRadius(16)
+                .shadow(radius: 5)
             }
             .padding()
-            .disabled(isLoading)
+            .foregroundStyle(.white)
         }
-        .navigationTitle("Préparer un plat")
+        .background(Color("primary"))
+        
     }
 
     private func sendRequestToAPI() {
@@ -73,7 +134,6 @@ struct CookingView: View {
     }
 }
 
-// Exemple de modèle pour les filtres
 struct Filters {
     var numberOfPeople: Int = 1
     var isVegetarian: Bool = false

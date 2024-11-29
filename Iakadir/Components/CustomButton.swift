@@ -15,10 +15,10 @@ struct CustomButton: View {
     var body: some View {
         Text(title) // Texte du bouton
             .fontWeight(.bold)
-            .font(.title)
+            .font(.title3)
             .foregroundColor(foregroundColor)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 30)
+            .padding(.vertical, 20)
             .background(backgroundColor)
             .cornerRadius(50)
     }
