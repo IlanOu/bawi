@@ -12,28 +12,40 @@ struct LoginView: View {
         NavigationView {
             ZStack {
                 
-                Image("Group 1") // Add this image to your assets
+                
+                
+                Image("Group 1")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .foregroundColor(Color(red: 0.6, green: 0.3, blue: 0.2)) // Brown-ish color for the lines
+                    .aspectRatio(contentMode: .fit)
                     .opacity(0.3)
                     .ignoresSafeArea()
+                    .clipped()
                 
                 VStack {
                     Spacer()
                     
+                    Text("Iakadir")
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                        .textCase(.uppercase)
+                    
+                    Spacer()
+                    
+                    
                     // Logo
-                    Image(systemName: "globe")
+                    Image("ramen")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.indigo)
-                        .frame(width: 250, height: 250)
-                        .shadow(radius: 10)
+                        .foregroundColor(.white)
+                        .frame(width: 350, height: 350)
                     
                     Spacer()
                     
                     // Titre
-                    Text("Ton assistant cuisine")
+                    Text("Ton assistant de cuisine")
                         .font(.largeTitle)
                         .fontWeight(.black)
                         .foregroundColor(.white)
@@ -55,7 +67,7 @@ struct LoginView: View {
                 }
                 .padding()
             }
-            .background(Color(hex: "#231D1C"))
+            .background(Color("primary"))
         }
     }
 }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CustomButton: View {
     var title: String
-    var backgroundColor: Color = Color(hex: "#FD8450")
-    var foregroundColor: Color = .white
+    var backgroundColor: Color = Color("secondary")
+    var foregroundColor: Color = Color("text")
     
     var body: some View {
         Text(title) // Texte du bouton

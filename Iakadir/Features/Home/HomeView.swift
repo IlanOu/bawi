@@ -4,11 +4,13 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Gradient background
-                LinearGradient(gradient: Gradient(colors: [Color.black, Color(hex: "1A1A1A")]),
-                               startPoint: .top,
-                               endPoint: .bottom)
+                
+                Image("Group 1")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .opacity(0.3)
                     .ignoresSafeArea()
+                    .clipped()
                 
                 VStack(spacing: 0) {
                     // Header section that doesn't scroll
@@ -19,11 +21,13 @@ struct HomeView: View {
                         content
                             .padding(.top, 24)
                     }
-                    .padding(.top, 10) // To offset the top padding from the ScrollView and avoid extra space
+                    .padding(.top, 10)
                 }
             }
-            .navigationBarHidden(true)
+            .background(Color("primary"))
         }
+        .navigationBarHidden(true)
+        .navigationBarTitle("")
     }
     
     // Header view
@@ -52,34 +56,46 @@ struct HomeView: View {
     // Scrollable content view
     private var content: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("Qu'est-ce que tu\nveux faire ?")
+            Text("Qu'est-ce que tu veux faire ?")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .padding(.horizontal)
                 .padding(.top, 16)
             
-            // Action cards grid
-            LazyVGrid(columns: [
-                GridItem(.flexible(), spacing: 16),
-                GridItem(.flexible(), spacing: 16)
-            ], spacing: 16) {
-                ActionCard(title: "Résumer\nun son",
-                           icon: "waveform",
-                           color: Color(hex: "A4E53A"))
-                
-                ActionCard(title: "Parler à l'IA",
-                           icon: "message",
-                           color: Color(hex: "9747FF"))
-                
-                ActionCard(title: "Générer une image",
-                           icon: "photo",
-                           color: Color(hex: "FF7EB0"))
-                    .gridCellColumns(2)
+            // Disposition personnalisée des cartes
+            VStack(spacing: 16) {
+                HStack(spacing: 16) {
+                    // Première carte occupant deux lignes
+                    ActionCard(
+                        title: "Préparer un plat",
+                        icon: "waveform",
+                        color: Color("secondary"),
+                        destination: CookingView(),
+                        height: 250
+                    )
+                    
+                    VStack(spacing: 16) {
+                        // Deuxième carte
+                        ActionCard(
+                            title: "Courses à venir",
+                            icon: "message",
+                            color: Color(hex: "9747FF"),
+                            destination: ShoppingView()
+                        )
+                        
+                        // Troisième carte
+                        ActionCard(
+                            title: "Bientôt disponible",
+                            icon: "photo",
+                            color: Color(Color.white.opacity(0.25)),
+                            destination: nil as EmptyView?)
+                    }
+                }
             }
             .padding(.horizontal)
             
-            // History section
+            // Historique
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
                     Text("Historique")
@@ -100,6 +116,8 @@ struct HomeView: View {
             .padding(.horizontal)
         }
     }
+
+
 }
 
 struct ProBadge: View {
@@ -115,34 +133,59 @@ struct ProBadge: View {
     }
 }
 
-struct ActionCard: View {
+
+struct ActionCard<Destination: View>: View {
     let title: String
     let icon: String
     let color: Color
+    var destination: Destination?
+    var height: CGFloat = 120
     
     var body: some View {
-        Button(action: {}) {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: icon)
-                        .font(.title2)
-                    Spacer()
+            Group {
+                if let destination = destination {
+                    NavigationLink(destination: destination) {
+                        cardContent
+                    }
+                } else {
+                    cardContent
+                }
+            }
+            .background(color)
+            .cornerRadius(16)
+    }
+    
+    private var cardContent: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: icon)
+                    .font(.title2)
+                Spacer()
+                if destination != nil {
                     Image(systemName: "arrow.up.right")
                         .font(.caption)
                 }
-                Spacer()
-                Text(title)
-                    .font(.headline)
-                    .multilineTextAlignment(.leading)
             }
-            .foregroundColor(.black)
-            .padding()
-            .frame(height: 120)
-            .background(color)
-            .cornerRadius(16)
+            Spacer()
+            if (height > 120){
+                Text(title)
+                    .font(.largeTitle)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }else{
+                Text(title)
+                    .font(.title2)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
+        .foregroundColor(.black)
+        .padding()
+        .frame(height: height)
     }
 }
+
+
 
 struct HistoryItem: View {
     var body: some View {
