@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var cookingViewModel = CookingViewModel()
+  
     var body: some View {
         NavigationView {
             ZStack {
@@ -71,7 +73,9 @@ struct HomeView: View {
                         title: "Préparer un plat",
                         icon: "waveform",
                         color: Color("secondary"),
-                        destination: CookingView(),
+                        destination:
+                          CookingView()
+                          .environmentObject(cookingViewModel),
                         height: 250
                     )
                     
@@ -250,5 +254,5 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 #Preview{
-    HomeView()
+  HomeView()
 }

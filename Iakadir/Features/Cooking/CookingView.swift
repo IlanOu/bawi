@@ -1,11 +1,12 @@
 import SwiftUI
 
 struct CookingView: View {
-    @State private var selectedTab: Int = 0 // Suivi de l'onglet sélectionné
+    @EnvironmentObject var cookingViewModel: CookingViewModel
+    @State private var selectedTab: Int = 0
     @State private var selectedImage: UIImage? = nil
     @State private var showImagePicker: Bool = false
-    @State private var selectedFoods: [String] = []
-    @State private var filters: Filters = Filters()
+    // @State private var selectedFoods: [String] = []
+    // @State private var filters: Filters = Filters()
     @State private var isLoading: Bool = false
     @State private var isPhoto = false
     
@@ -20,7 +21,6 @@ struct CookingView: View {
             
             VStack {
                 
-                // Contenu de la vue en fonction de l'onglet sélectionné
                 if selectedTab == 0 {
                     
                     Text("Dans mon frigo \nil y a...")
@@ -65,7 +65,7 @@ struct CookingView: View {
                             }
                         } else {
                             ScrollView {
-                                FoodListView(selectedFoods: $selectedFoods)
+                                FoodListView()
                             }
                         }
                     }
@@ -80,13 +80,16 @@ struct CookingView: View {
                     Spacer()
                     
                     VStack {
-                        FilterView(filters: $filters)
+                        FilterView()
                     }
                     
                     Spacer()
                 
                     VStack {
-                        Button(action: { sendRequestToAPI() }) {
+                      Button(action: {
+                        sendRequestToAPI();
+                        cookingViewModel.logData()
+                      }) {
                             if isLoading{
                                 CustomButton(title: "Attends, ça charge...")
                             }else{
@@ -100,19 +103,18 @@ struct CookingView: View {
                 
                 Spacer()
                 
-                // Personnalisation de la barre d'onglets
                 HStack {
                     // Onglet 1
                     Button(action: { selectedTab = 0 }) {
                         Text("Aliments")
-                            .foregroundColor(selectedTab == 0 ? .blue : .gray) // Couleur dynamique
+                            .foregroundColor(selectedTab == 0 ? .blue : .gray)
                     }
                     .padding()
                     
                     // Onglet 2
                     Button(action: { selectedTab = 1 }) {
                         Text("Filtres")
-                            .foregroundColor(selectedTab == 1 ? .blue : .gray) // Couleur dynamique
+                            .foregroundColor(selectedTab == 1 ? .blue : .gray)
                     }
                     .padding()
                    
@@ -125,6 +127,7 @@ struct CookingView: View {
             .foregroundStyle(.white)
         }
         .background(Color("primary"))
+        .environmentObject(cookingViewModel)
         
     }
 
@@ -141,5 +144,5 @@ struct Filters {
 }
 
 #Preview {
-    CookingView()
+    HomeView()
 }
