@@ -55,7 +55,7 @@ struct WelcomeView: View {
                     
                     
                     NavigationLink(
-                        destination: HomeView(),
+                        destination: LoginView(),
                         label: {
                             CustomButton(title: "C'est parti !")
                         }

@@ -13,6 +13,7 @@
 		ED85CFD32D09A01100ED39FC /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFD22D09A01100ED39FC /* Realtime */; };
 		ED85CFD52D09A01100ED39FC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFD42D09A01100ED39FC /* Storage */; };
 		ED85CFD72D09A01100ED39FC /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFD62D09A01100ED39FC /* Supabase */; };
+		ED85CFE72D09BA1400ED39FC /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFE62D09BA1400ED39FC /* SwiftKeychainWrapper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +39,38 @@
 		ED65036C2CF89FD900423E8F /* IakadirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IakadirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ED85CFE92D09C5DE00ED39FC /* Exceptions for "Iakadir" folder in "Iakadir" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ED6503512CF89FD800423E8F /* Iakadir */;
+		};
+		ED85D0352D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BaseConfig.xcconfig,
+			);
+			target = ED6503612CF89FD900423E8F /* IakadirTests */;
+		};
+		ED85D0362D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BaseConfig.xcconfig,
+			);
+			target = ED65036B2CF89FD900423E8F /* IakadirUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ED6503542CF89FD800423E8F /* Iakadir */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ED85CFE92D09C5DE00ED39FC /* Exceptions for "Iakadir" folder in "Iakadir" target */,
+				ED85D0352D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirTests" target */,
+				ED85D0362D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirUITests" target */,
+			);
 			path = Iakadir;
 			sourceTree = "<group>";
 		};
@@ -67,6 +97,7 @@
 				ED85CFCD2D09A01100ED39FC /* Auth in Frameworks */,
 				ED85CFD52D09A01100ED39FC /* Storage in Frameworks */,
 				ED85CFD32D09A01100ED39FC /* Realtime in Frameworks */,
+				ED85CFE72D09BA1400ED39FC /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +164,7 @@
 				ED85CFD22D09A01100ED39FC /* Realtime */,
 				ED85CFD42D09A01100ED39FC /* Storage */,
 				ED85CFD62D09A01100ED39FC /* Supabase */,
+				ED85CFE62D09BA1400ED39FC /* SwiftKeychainWrapper */,
 			);
 			productName = Iakadir;
 			productReference = ED6503522CF89FD800423E8F /* Iakadir.app */;
@@ -218,6 +250,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				ED85CFC82D099DBD00ED39FC /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				ED85CFE52D09BA1400ED39FC /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ED6503532CF89FD800423E8F /* Products */;
@@ -428,6 +461,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Iakadir/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Iakadir/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -458,6 +492,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Iakadir/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Iakadir/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -602,6 +637,14 @@
 				minimumVersion = 2.5.1;
 			};
 		};
+		ED85CFE52D09BA1400ED39FC /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -634,6 +677,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED85CFC82D099DBD00ED39FC /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		ED85CFE62D09BA1400ED39FC /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED85CFE52D09BA1400ED39FC /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

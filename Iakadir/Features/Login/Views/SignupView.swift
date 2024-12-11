@@ -26,7 +26,11 @@ struct SignupView: View {
         SecureField("Confirm Password", text: $viewModel.confirmPassword)
           .textFieldStyle(RoundedBorderTextFieldStyle())
         
-        Button(action: viewModel.signup) {
+        Button(action: {
+          Task {
+            await viewModel.signup()
+            }
+          }) {
           Text("Sign Up")
             .frame(maxWidth: .infinity)
             .padding()

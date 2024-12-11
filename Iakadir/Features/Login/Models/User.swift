@@ -1,5 +1,6 @@
-struct User: Codable {
-  let id: String
+import Foundation
+
+struct User: Decodable {
+  let id: UUID
   let email: String
-  let username: String?
 }

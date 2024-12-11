@@ -1,18 +1,26 @@
 import Foundation
 import Supabase
 
-class SupabaseClient {
-  static let shared = SupabaseClient()
+class SupabaseClientAuth {
+  static let shared = SupabaseClientAuth()
   
   let client: SupabaseClient
   
   private init() {
-    guard let supabaseURL = Config.supabaseUrl,
-          let supabaseAnonKey = Config.supabaseAnonKey,
-          !supabaseURL.isEmpty, !supabaseAnonKey.isEmpty else {
-      fatalError("Supabase URL and Anon Key must be set in Config.xcconfig")
+
+    
+    guard let supabaseUrl = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String,
+          let supabaseAnonKey = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String else {
+      fatalError("⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées.")
     }
     
-    self.client = SupabaseClient(supabaseURL: URL(string: supabaseURL)!, supabaseKey: supabaseAnonKey)
+    print("Supabase URL: \(supabaseUrl)")
+    print("Supabase Anon Key: \(supabaseAnonKey)")
+    
+    self.client = SupabaseClient(
+      supabaseURL: URL(string: "https://\(supabaseUrl).supabase.co")!,
+      supabaseKey: supabaseAnonKey
+    )
+    
   }
 }
