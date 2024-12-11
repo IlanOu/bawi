@@ -8,7 +8,7 @@ struct FoodListView: View {
     ScrollView {
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
         ForEach($cookingViewModel.selectedFoods) { $ingredient in
-          IngredientCard(
+          IngredientView(
             ingredient: $ingredient,
             onIncrement: {
               cookingViewModel.incrementQuantity(of: ingredient)

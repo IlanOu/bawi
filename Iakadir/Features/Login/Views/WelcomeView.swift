@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct WelcomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                
-                
                 
                 Image("Group 1")
                     .resizable()
@@ -73,5 +71,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    WelcomeView()
 }

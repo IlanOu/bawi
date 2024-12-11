@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct IngredientCard: View {
+struct IngredientView: View {
   @Binding var ingredient: Ingredient
   var onIncrement: () -> Void
   var onDecrement: () -> Void
