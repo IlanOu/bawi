@@ -3,7 +3,6 @@ import SwiftUI
 struct FoodListView: View {
   
   @EnvironmentObject var cookingViewModel: CookingViewModel
-  @StateObject private var viewModel = FoodListViewModel()
   
   var body: some View {
     ScrollView {

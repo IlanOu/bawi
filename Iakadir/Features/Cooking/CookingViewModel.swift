@@ -7,6 +7,9 @@ class CookingViewModel: ObservableObject {
   
   func logData() {
     print("📝 Données enregistrées :")
+
+    print("Quantité de personnes : \(filters.numberOfPeople)")
+
     
     print("  - Aliments sélectionnés :")
     for ingredient in selectedFoods {
