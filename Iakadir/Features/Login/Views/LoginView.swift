@@ -3,6 +3,7 @@ import SwiftUI
 struct LoginView: View {
   @StateObject private var viewModel = LoginViewModel()
   @State private var isSignupPresented = false
+  @State private var isLoggedIn = false  // Gérer l'état de la connexion
   
   var body: some View {
     NavigationView {
@@ -19,7 +20,14 @@ struct LoginView: View {
         SecureField("Password", text: $viewModel.password)
           .textFieldStyle(RoundedBorderTextFieldStyle())
         
-        Button(action: viewModel.login) {
+        Button(action: {
+          Task {
+            await viewModel.login()
+            if viewModel.isLoginSuccessful {
+              isLoggedIn = true  // Rediriger vers HomeView après la connexion réussie
+            }
+          }
+        }) {
           Text("Log In")
             .frame(maxWidth: .infinity)
             .padding()
@@ -46,9 +54,16 @@ struct LoginView: View {
       }
       .padding()
       .navigationBarHidden(true)
-    }
-    .sheet(isPresented: $isSignupPresented) {
-      SignupView()
+      .background(
+        NavigationLink(
+          destination: HomeView(),  // Afficher HomeView si l'utilisateur est connecté
+          isActive: $isLoggedIn,  // Lier l'état de connexion
+          label: { EmptyView() }
+        )
+      )
+      .sheet(isPresented: $isSignupPresented) {
+        SignupView(isSignupPresented: $isSignupPresented, isLoggedIn: $isLoggedIn)  // Passer isLoggedIn ici
+      }
     }
   }
 }

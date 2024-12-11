@@ -9,6 +9,8 @@ class SignupViewModel: ObservableObject {
   @Published var username = ""
   @Published var isLoading = false
   @Published var error: String?
+  @Published var isSignupSuccessful: Bool = false
+
   
   private let authService: AuthenticationServiceProtocol
   
@@ -19,16 +21,21 @@ class SignupViewModel: ObservableObject {
   func signup() async {
     guard password == confirmPassword else {
       error = "Passwords do not match"
+      isLoading = false
       return
     }
     
+    isLoading = true
+    
     do {
-      let user = try await authService.signup(email: email, password: password)
+      try await authService.signup(email: email, password: password)
+      isSignupSuccessful = true
+      // Mettre à jour l'état pour indiquer que l'inscription a réussi
+      isLoading = false
     } catch {
-      print("error sign up")
+      self.error = error.localizedDescription
+      isLoading = false
     }
-    
-    isLoading = false
-    
   }
+
 }

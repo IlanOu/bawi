@@ -2,63 +2,59 @@ import SwiftUI
 
 struct SignupView: View {
   @StateObject private var viewModel = SignupViewModel()
-  @Environment(\.presentationMode) var presentationMode
+  @Binding var isSignupPresented: Bool
+  @Binding var isLoggedIn: Bool  // Passer l'état de connexion à la vue
   
   var body: some View {
-    NavigationView {
-      VStack(spacing: 20) {
-        Text("Create Account")
-          .font(.largeTitle)
-          .fontWeight(.bold)
-        
-        TextField("Email", text: $viewModel.email)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(.none)
-          .keyboardType(.emailAddress)
-        
-        TextField("Username", text: $viewModel.username)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(.none)
-        
-        SecureField("Password", text: $viewModel.password)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-        
-        SecureField("Confirm Password", text: $viewModel.confirmPassword)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-        
-        Button(action: {
-          Task {
-            await viewModel.signup()
-            }
-          }) {
-          Text("Sign Up")
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.green)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+    VStack(spacing: 20) {
+      Text("Create Account")
+        .font(.largeTitle)
+        .fontWeight(.bold)
+      
+      TextField("Email", text: $viewModel.email)
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .autocapitalization(.none)
+        .keyboardType(.emailAddress)
+      
+      SecureField("Password", text: $viewModel.password)
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+      
+      SecureField("Confirm Password", text: $viewModel.confirmPassword)
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+      
+      Button(action: {
+        Task {
+          await viewModel.signup()
+          if viewModel.isSignupSuccessful {
+            isLoggedIn = true  // Mettre isLoggedIn à true après une inscription réussie
+            isSignupPresented = false  // Fermer le sheet
+          }
         }
-        .disabled(viewModel.isLoading)
-        
-        if viewModel.isLoading {
-          ProgressView()
-        }
-        
-        if let error = viewModel.error {
-          Text(error)
-            .foregroundColor(.red)
-        }
-        
-        Spacer()
+      }) {
+        Text("Sign Up")
+          .frame(maxWidth: .infinity)
+          .padding()
+          .background(Color.green)
+          .foregroundColor(.white)
+          .cornerRadius(10)
       }
-      .padding()
-      .navigationBarItems(leading: Button("Cancel") {
-        presentationMode.wrappedValue.dismiss()
-      })
+      .disabled(viewModel.isLoading)
+      
+      if viewModel.isLoading {
+        ProgressView()
+      }
+      
+      if let error = viewModel.error {
+        Text(error)
+          .foregroundColor(.red)
+      }
+      
+      Spacer()
     }
+    .padding()
   }
 }
 
 #Preview {
-  LoginView()
+  SignupView(isSignupPresented: .constant(true), isLoggedIn: .constant(false))
 }

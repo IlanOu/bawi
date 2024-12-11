@@ -28,8 +28,10 @@ struct HomeView: View {
             }
             .background(Color("primary"))
         }
-        .navigationBarHidden(true)
         .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        
     }
     
     // Header view
@@ -217,6 +219,7 @@ struct HistoryItem: View {
             .cornerRadius(12)
         }
     }
+  
 }
 
 // Helper extension for hex colors

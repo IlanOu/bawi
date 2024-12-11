@@ -6,6 +6,7 @@ class LoginViewModel: ObservableObject {
   @Published var password = ""
   @Published var isLoading = false
   @Published var error: String?
+  @Published var isLoginSuccessful = false  // Nouvelle variable pour l'état de la connexion réussie
   
   private let authService: AuthenticationServiceProtocol
   
@@ -17,11 +18,13 @@ class LoginViewModel: ObservableObject {
     Task {
       isLoading = true
       error = nil
+      isLoginSuccessful = false  // Réinitialiser l'état de la connexion réussie à chaque tentative
       
       do {
         let user = try await authService.login(email: email, password: password)
         print("Logged in user: \(user)")
-        // TODO: Handle successful login (e.g., navigate to main app screen)
+        // Si la connexion est réussie, on met à jour l'état
+        isLoginSuccessful = true
       } catch {
         self.error = error.localizedDescription
       }
@@ -30,4 +33,3 @@ class LoginViewModel: ObservableObject {
     }
   }
 }
-
