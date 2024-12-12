@@ -1,128 +1,158 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var cookingViewModel = CookingViewModel()
+  @StateObject private var cookingViewModel = CookingViewModel()
+  @StateObject private var discussionManager = DiscussionManager.shared
+  @State private var isLoading = false
+  @State private var apiResponse: String = ""
   
-    var body: some View {
-        NavigationView {
-            ZStack {
-                
-                Image("Group 1")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(0.3)
-                    .ignoresSafeArea()
-                    .clipped()
-                
-                VStack(spacing: 0) {
-                    // Header section that doesn't scroll
-                    header
-                    
-                    // Scrollable content
-                    ScrollView {
-                        content
-                            .padding(.top, 24)
-                    }
-                    .padding(.top, 10)
-                }
-            }
-            .background(Color("primary"))
-        }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
+  var body: some View {
+    NavigationView {
+      ZStack {
+        Image("Group 1")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .opacity(0.3)
+          .ignoresSafeArea()
+          .clipped()
         
-    }
-    
-    // Header view
-    private var header: some View {
-        VStack {
-            HStack {
-                Button(action: {}) {
-                    Image(systemName: "line.horizontal.3")
-                        .foregroundColor(.white)
-                }
-                HStack(spacing: 8) {
-                    Spacer()
-                    Text("Hello, ma flend")
-                        .foregroundColor(.white)
-                    Text("👋")
-                    Spacer()
-                    ProBadge()
-                }
-                
-            }
-            .padding(.horizontal)
-            .padding(.top, 24)
+        VStack(spacing: 0) {
+          // Header section that doesn't scroll
+          header
+          
+          // Scrollable content
+          ScrollView {
+            content
+              .padding(.top, 24)
+          }
+          .padding(.top, 10)
         }
+      }
+      .background(Color("primary"))
     }
-    
-    // Scrollable content view
-    private var content: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Text("Qu'est-ce que tu veux faire ?")
-                .font(.title)
-                .fontWeight(.bold)
+    .navigationBarTitle("")
+    .navigationBarHidden(true)
+    .navigationBarBackButtonHidden(true)
+  }
+  
+  // Header view
+  private var header: some View {
+    VStack {
+      HStack {
+        Button(action: {}) {
+          Image(systemName: "line.horizontal.3")
+            .foregroundColor(.white)
+        }
+        HStack(spacing: 8) {
+          Spacer()
+          Text("Hello, ma flend")
+            .foregroundColor(.white)
+          Text("👋")
+          Spacer()
+          ProBadge()
+        }
+      }
+      .padding(.horizontal)
+      .padding(.top, 24)
+    }
+  }
+  
+  // Scrollable content view
+  private var content: some View {
+    VStack(alignment: .leading, spacing: 24) {
+      Text("Qu'est-ce que tu veux faire ?")
+        .font(.title)
+        .fontWeight(.bold)
+        .foregroundColor(.white)
+        .padding(.horizontal)
+        .padding(.top, 16)
+      
+      // Disposition personnalisée des cartes
+      VStack(spacing: 16) {
+        HStack(spacing: 16) {
+          // Première carte occupant deux lignes
+          ActionCard(
+            title: "Préparer un plat",
+            icon: "waveform",
+            color: Color("secondary"),
+            destination:
+              CookingView()
+              .environmentObject(cookingViewModel)
+              .environmentObject(discussionManager),
+            height: 250
+          )
+          
+          VStack(spacing: 16) {
+            // Deuxième carte
+            ActionCard(
+              title: "Courses à venir",
+              icon: "message",
+              color: Color(hex: "9747FF"),
+              destination: ShoppingView()
+            )
+            
+            // Troisième carte
+            ActionCard(
+              title: "Bientôt disponible",
+              icon: "photo",
+              color: Color(Color.white.opacity(0.25)),
+              destination: nil as EmptyView?)
+          }
+        }
+      }
+      .padding(.horizontal)
+      
+      // Historique
+      VStack(alignment: .leading, spacing: 16) {
+        HStack {
+          Text("Historique")
+            .font(.title3)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+          Spacer()
+          Button() {
+            // Action pour afficher tous les historiques
+          } label: {
+            NavigationLink(destination: AllDiscussionsView().environmentObject(discussionManager)) {
+              Text("Voir tout")
+                .foregroundColor(.gray)
+            }
+          }
+          .foregroundColor(.gray)
+        }
+        
+        // Affichage des 3 dernières discussions
+        ForEach(discussionManager.discussions.prefix(3), id: \.self) { discussion in
+          NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
+            HStack(spacing: 12) {
+              Circle()
+                .fill(Color.gray.opacity(0.3))
+                .frame(width: 40, height: 40)
+                .overlay(
+                  Image(systemName: "waveform")
+                    .foregroundColor(.white)
+                )
+              
+              Text(discussion)
                 .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(.top, 16)
-            
-            // Disposition personnalisée des cartes
-            VStack(spacing: 16) {
-                HStack(spacing: 16) {
-                    // Première carte occupant deux lignes
-                    ActionCard(
-                        title: "Préparer un plat",
-                        icon: "waveform",
-                        color: Color("secondary"),
-                        destination:
-                          CookingView()
-                          .environmentObject(cookingViewModel),
-                        height: 250
-                    )
-                    
-                    VStack(spacing: 16) {
-                        // Deuxième carte
-                        ActionCard(
-                            title: "Courses à venir",
-                            icon: "message",
-                            color: Color(hex: "9747FF"),
-                            destination: ShoppingView()
-                        )
-                        
-                        // Troisième carte
-                        ActionCard(
-                            title: "Bientôt disponible",
-                            icon: "photo",
-                            color: Color(Color.white.opacity(0.25)),
-                            destination: nil as EmptyView?)
-                    }
-                }
+                .lineLimit(1)
+              
+              Spacer()
+              
+              Image(systemName: "ellipsis")
+                .foregroundColor(.gray)
             }
-            .padding(.horizontal)
-            
-            // Historique
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    Text("Historique")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    Spacer()
-                    Button("Voir tout") {
-                        // Action
-                    }
-                    .foregroundColor(.gray)
-                }
-                
-                ForEach(0..<3) { _ in
-                    HistoryItem()
-                }
-            }
-            .padding(.horizontal)
+            .padding()
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(12)
+          }
         }
+      }
+      .padding(.horizontal)
     }
+  }
 }
+
 
 struct ProBadge: View {
     var body: some View {
@@ -187,37 +217,6 @@ struct ActionCard<Destination: View>: View {
         .padding()
         .frame(height: height)
     }
-}
-
-
-
-struct HistoryItem: View {
-    var body: some View {
-        Button(action: {}) {
-            HStack(spacing: 12) {
-                Circle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 40, height: 40)
-                    .overlay(
-                        Image(systemName: "waveform")
-                            .foregroundColor(.white)
-                    )
-                
-                Text("Swift est un langage de programmation...")
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                
-                Spacer()
-                
-                Image(systemName: "ellipsis")
-                    .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(12)
-        }
-    }
-  
 }
 
 // Helper extension for hex colors

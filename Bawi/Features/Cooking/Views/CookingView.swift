@@ -34,6 +34,5 @@ struct CookingView: View {
       .foregroundStyle(.white)
     }
     .background(Color("primary"))
-    .environmentObject(cookingViewModel)
   }
 }

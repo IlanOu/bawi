@@ -14,6 +14,7 @@
 		ED85CFD52D09A01100ED39FC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFD42D09A01100ED39FC /* Storage */; };
 		ED85CFD72D09A01100ED39FC /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFD62D09A01100ED39FC /* Supabase */; };
 		ED85CFE72D09BA1400ED39FC /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = ED85CFE62D09BA1400ED39FC /* SwiftKeychainWrapper */; };
+		EDA2201B2D0B392A00C4609E /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = EDA2201A2D0B392A00C4609E /* MarkdownUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 				ED85CFD12D09A01100ED39FC /* PostgREST in Frameworks */,
 				ED85CFCF2D09A01100ED39FC /* Functions in Frameworks */,
 				ED85CFD72D09A01100ED39FC /* Supabase in Frameworks */,
+				EDA2201B2D0B392A00C4609E /* MarkdownUI in Frameworks */,
 				ED85CFCD2D09A01100ED39FC /* Auth in Frameworks */,
 				ED85CFD52D09A01100ED39FC /* Storage in Frameworks */,
 				ED85CFD32D09A01100ED39FC /* Realtime in Frameworks */,
@@ -165,6 +167,7 @@
 				ED85CFD42D09A01100ED39FC /* Storage */,
 				ED85CFD62D09A01100ED39FC /* Supabase */,
 				ED85CFE62D09BA1400ED39FC /* SwiftKeychainWrapper */,
+				EDA2201A2D0B392A00C4609E /* MarkdownUI */,
 			);
 			productName = Iakadir;
 			productReference = ED6503522CF89FD800423E8F /* Bawi.app */;
@@ -251,6 +254,7 @@
 			packageReferences = (
 				ED85CFC82D099DBD00ED39FC /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				ED85CFE52D09BA1400ED39FC /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				EDA220192D0B392A00C4609E /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ED6503532CF89FD800423E8F /* Products */;
@@ -645,6 +649,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		EDA220192D0B392A00C4609E /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -682,6 +694,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED85CFE52D09BA1400ED39FC /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		EDA2201A2D0B392A00C4609E /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDA220192D0B392A00C4609E /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

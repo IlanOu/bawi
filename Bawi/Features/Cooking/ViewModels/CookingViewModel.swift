@@ -58,6 +58,8 @@ class CookingViewModel: ObservableObject {
     prompt += "\n4. Les étapes de préparation numérotées"
     prompt += "\n5. Quelques conseils de préparation si nécessaire"
     
+    prompt += "\n\n Commence directement à répondre en donnant la recette."
+    
     return prompt
   }
   

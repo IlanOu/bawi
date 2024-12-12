@@ -19,7 +19,7 @@ struct FilterView: View {
         HStack(spacing: 8) {
           // Bouton pour diminuer le nombre de personnes
           Button(action: {
-            if cookingViewModel.filters.numberOfPeople > 0 {
+            if cookingViewModel.filters.numberOfPeople > 1 {
               cookingViewModel.filters.numberOfPeople -= 1
             }
           }) {
@@ -46,6 +46,7 @@ struct FilterView: View {
       // Options de filtres
       Toggle("Végétarien ?", isOn: $cookingViewModel.filters.isVegetarian)
       Toggle("Sans gluten ?", isOn: $cookingViewModel.filters.isGlutenFree)
+      Toggle("T'as un four ?", isOn: $cookingViewModel.filters.haveFurnace)
     }
     .padding()
     .background(Color.gray.opacity(0.1))
