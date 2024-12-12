@@ -1,14 +1,14 @@
 //
-//  IakadirTests.swift
-//  IakadirTests
+//  BawiTests.swift
+//  BawiTests
 //
 //  Created by digital on 28/11/2024.
 //
 
 import Testing
-@testable import Iakadir
+@testable import Bawi
 
-struct IakadirTests {
+struct BawiTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

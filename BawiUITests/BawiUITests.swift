@@ -1,13 +1,13 @@
 //
-//  IakadirUITests.swift
-//  IakadirUITests
+//  BawiUITests.swift
+//  BawiUITests
 //
 //  Created by digital on 28/11/2024.
 //
 
 import XCTest
 
-final class IakadirUITests: XCTestCase {
+final class BawiUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

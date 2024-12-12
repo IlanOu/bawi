@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  Iakadir
+//  Bawi
 //
 //  Created by digital on 28/11/2024.
 //
@@ -22,7 +22,7 @@ struct WelcomeView: View {
                 VStack {
                     Spacer()
                     
-                    Text("Iakadir")
+                    Text("Bawi")
                         .font(.largeTitle)
                         .fontWeight(.black)
                         .foregroundColor(.white)

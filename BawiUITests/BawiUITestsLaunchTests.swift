@@ -1,13 +1,13 @@
 //
-//  IakadirUITestsLaunchTests.swift
-//  IakadirUITests
+//  BawiUITestsLaunchTests.swift
+//  BawiUITests
 //
 //  Created by digital on 28/11/2024.
 //
 
 import XCTest
 
-final class IakadirUITestsLaunchTests: XCTestCase {
+final class BawiUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

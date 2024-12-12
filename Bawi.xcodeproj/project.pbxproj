@@ -34,54 +34,54 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		ED6503522CF89FD800423E8F /* Iakadir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iakadir.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED6503622CF89FD900423E8F /* IakadirTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IakadirTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED65036C2CF89FD900423E8F /* IakadirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IakadirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED6503522CF89FD800423E8F /* Bawi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bawi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED6503622CF89FD900423E8F /* BawiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BawiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED65036C2CF89FD900423E8F /* BawiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BawiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		ED85CFE92D09C5DE00ED39FC /* Exceptions for "Iakadir" folder in "Iakadir" target */ = {
+		ED85CFE92D09C5DE00ED39FC /* Exceptions for "Bawi" folder in "Bawi" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = ED6503512CF89FD800423E8F /* Iakadir */;
+			target = ED6503512CF89FD800423E8F /* Bawi */;
 		};
-		ED85D0352D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirTests" target */ = {
+		ED85D0352D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				BaseConfig.xcconfig,
 			);
-			target = ED6503612CF89FD900423E8F /* IakadirTests */;
+			target = ED6503612CF89FD900423E8F /* BawiTests */;
 		};
-		ED85D0362D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirUITests" target */ = {
+		ED85D0362D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				BaseConfig.xcconfig,
 			);
-			target = ED65036B2CF89FD900423E8F /* IakadirUITests */;
+			target = ED65036B2CF89FD900423E8F /* BawiUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		ED6503542CF89FD800423E8F /* Iakadir */ = {
+		ED6503542CF89FD800423E8F /* Bawi */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				ED85CFE92D09C5DE00ED39FC /* Exceptions for "Iakadir" folder in "Iakadir" target */,
-				ED85D0352D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirTests" target */,
-				ED85D0362D09D04900ED39FC /* Exceptions for "Iakadir" folder in "IakadirUITests" target */,
+				ED85CFE92D09C5DE00ED39FC /* Exceptions for "Bawi" folder in "Bawi" target */,
+				ED85D0352D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiTests" target */,
+				ED85D0362D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiUITests" target */,
 			);
-			path = Iakadir;
+			path = Bawi;
 			sourceTree = "<group>";
 		};
-		ED6503652CF89FD900423E8F /* IakadirTests */ = {
+		ED6503652CF89FD900423E8F /* BawiTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = IakadirTests;
+			path = BawiTests;
 			sourceTree = "<group>";
 		};
-		ED65036F2CF89FD900423E8F /* IakadirUITests */ = {
+		ED65036F2CF89FD900423E8F /* BawiUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = IakadirUITests;
+			path = BawiUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -121,9 +121,9 @@
 		ED6503492CF89FD700423E8F = {
 			isa = PBXGroup;
 			children = (
-				ED6503542CF89FD800423E8F /* Iakadir */,
-				ED6503652CF89FD900423E8F /* IakadirTests */,
-				ED65036F2CF89FD900423E8F /* IakadirUITests */,
+				ED6503542CF89FD800423E8F /* Bawi */,
+				ED6503652CF89FD900423E8F /* BawiTests */,
+				ED65036F2CF89FD900423E8F /* BawiUITests */,
 				ED6503532CF89FD800423E8F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 		ED6503532CF89FD800423E8F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED6503522CF89FD800423E8F /* Iakadir.app */,
-				ED6503622CF89FD900423E8F /* IakadirTests.xctest */,
-				ED65036C2CF89FD900423E8F /* IakadirUITests.xctest */,
+				ED6503522CF89FD800423E8F /* Bawi.app */,
+				ED6503622CF89FD900423E8F /* BawiTests.xctest */,
+				ED65036C2CF89FD900423E8F /* BawiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ED6503512CF89FD800423E8F /* Iakadir */ = {
+		ED6503512CF89FD800423E8F /* Bawi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED6503762CF89FD900423E8F /* Build configuration list for PBXNativeTarget "Iakadir" */;
+			buildConfigurationList = ED6503762CF89FD900423E8F /* Build configuration list for PBXNativeTarget "Bawi" */;
 			buildPhases = (
 				ED65034E2CF89FD800423E8F /* Sources */,
 				ED65034F2CF89FD800423E8F /* Frameworks */,
@@ -154,9 +154,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				ED6503542CF89FD800423E8F /* Iakadir */,
+				ED6503542CF89FD800423E8F /* Bawi */,
 			);
-			name = Iakadir;
+			name = Bawi;
 			packageProductDependencies = (
 				ED85CFCC2D09A01100ED39FC /* Auth */,
 				ED85CFCE2D09A01100ED39FC /* Functions */,
@@ -167,12 +167,12 @@
 				ED85CFE62D09BA1400ED39FC /* SwiftKeychainWrapper */,
 			);
 			productName = Iakadir;
-			productReference = ED6503522CF89FD800423E8F /* Iakadir.app */;
+			productReference = ED6503522CF89FD800423E8F /* Bawi.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED6503612CF89FD900423E8F /* IakadirTests */ = {
+		ED6503612CF89FD900423E8F /* BawiTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED6503792CF89FD900423E8F /* Build configuration list for PBXNativeTarget "IakadirTests" */;
+			buildConfigurationList = ED6503792CF89FD900423E8F /* Build configuration list for PBXNativeTarget "BawiTests" */;
 			buildPhases = (
 				ED65035E2CF89FD900423E8F /* Sources */,
 				ED65035F2CF89FD900423E8F /* Frameworks */,
@@ -184,18 +184,18 @@
 				ED6503642CF89FD900423E8F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				ED6503652CF89FD900423E8F /* IakadirTests */,
+				ED6503652CF89FD900423E8F /* BawiTests */,
 			);
-			name = IakadirTests;
+			name = BawiTests;
 			packageProductDependencies = (
 			);
 			productName = IakadirTests;
-			productReference = ED6503622CF89FD900423E8F /* IakadirTests.xctest */;
+			productReference = ED6503622CF89FD900423E8F /* BawiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		ED65036B2CF89FD900423E8F /* IakadirUITests */ = {
+		ED65036B2CF89FD900423E8F /* BawiUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED65037C2CF89FD900423E8F /* Build configuration list for PBXNativeTarget "IakadirUITests" */;
+			buildConfigurationList = ED65037C2CF89FD900423E8F /* Build configuration list for PBXNativeTarget "BawiUITests" */;
 			buildPhases = (
 				ED6503682CF89FD900423E8F /* Sources */,
 				ED6503692CF89FD900423E8F /* Frameworks */,
@@ -207,13 +207,13 @@
 				ED65036E2CF89FD900423E8F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				ED65036F2CF89FD900423E8F /* IakadirUITests */,
+				ED65036F2CF89FD900423E8F /* BawiUITests */,
 			);
-			name = IakadirUITests;
+			name = BawiUITests;
 			packageProductDependencies = (
 			);
 			productName = IakadirUITests;
-			productReference = ED65036C2CF89FD900423E8F /* IakadirUITests.xctest */;
+			productReference = ED65036C2CF89FD900423E8F /* BawiUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -239,7 +239,7 @@
 					};
 				};
 			};
-			buildConfigurationList = ED65034D2CF89FD700423E8F /* Build configuration list for PBXProject "Iakadir" */;
+			buildConfigurationList = ED65034D2CF89FD700423E8F /* Build configuration list for PBXProject "Bawi" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -257,9 +257,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED6503512CF89FD800423E8F /* Iakadir */,
-				ED6503612CF89FD900423E8F /* IakadirTests */,
-				ED65036B2CF89FD900423E8F /* IakadirUITests */,
+				ED6503512CF89FD800423E8F /* Bawi */,
+				ED6503612CF89FD900423E8F /* BawiTests */,
+				ED65036B2CF89FD900423E8F /* BawiUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -315,12 +315,12 @@
 /* Begin PBXTargetDependency section */
 		ED6503642CF89FD900423E8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ED6503512CF89FD800423E8F /* Iakadir */;
+			target = ED6503512CF89FD800423E8F /* Bawi */;
 			targetProxy = ED6503632CF89FD900423E8F /* PBXContainerItemProxy */;
 		};
 		ED65036E2CF89FD900423E8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ED6503512CF89FD800423E8F /* Iakadir */;
+			target = ED6503512CF89FD800423E8F /* Bawi */;
 			targetProxy = ED65036D2CF89FD900423E8F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -328,7 +328,7 @@
 /* Begin XCBuildConfiguration section */
 		ED6503742CF89FD900423E8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -393,7 +393,7 @@
 		};
 		ED6503752CF89FD900423E8F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -451,17 +451,17 @@
 		};
 		ED6503772CF89FD900423E8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Iakadir/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Bawi/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Iakadir/Info.plist;
+				INFOPLIST_FILE = Bawi/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -472,7 +472,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nay.mereden.Iakadir;
+				PRODUCT_BUNDLE_IDENTIFIER = nay.mereden.Bawi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -482,17 +482,17 @@
 		};
 		ED6503782CF89FD900423E8F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Iakadir/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Bawi/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Iakadir/Info.plist;
+				INFOPLIST_FILE = Bawi/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -503,7 +503,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nay.mereden.Iakadir;
+				PRODUCT_BUNDLE_IDENTIFIER = nay.mereden.Bawi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -513,7 +513,7 @@
 		};
 		ED65037A2CF89FD900423E8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -527,13 +527,13 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Iakadir.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Iakadir";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bawi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bawi";
 			};
 			name = Debug;
 		};
 		ED65037B2CF89FD900423E8F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -547,13 +547,13 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Iakadir.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Iakadir";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bawi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bawi";
 			};
 			name = Release;
 		};
 		ED65037D2CF89FD900423E8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -571,7 +571,7 @@
 		};
 		ED65037E2CF89FD900423E8F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Iakadir */;
+			baseConfigurationReferenceAnchor = ED6503542CF89FD800423E8F /* Bawi */;
 			baseConfigurationReferenceRelativePath = BaseConfig.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -590,7 +590,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED65034D2CF89FD700423E8F /* Build configuration list for PBXProject "Iakadir" */ = {
+		ED65034D2CF89FD700423E8F /* Build configuration list for PBXProject "Bawi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED6503742CF89FD900423E8F /* Debug */,
@@ -599,7 +599,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED6503762CF89FD900423E8F /* Build configuration list for PBXNativeTarget "Iakadir" */ = {
+		ED6503762CF89FD900423E8F /* Build configuration list for PBXNativeTarget "Bawi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED6503772CF89FD900423E8F /* Debug */,
@@ -608,7 +608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED6503792CF89FD900423E8F /* Build configuration list for PBXNativeTarget "IakadirTests" */ = {
+		ED6503792CF89FD900423E8F /* Build configuration list for PBXNativeTarget "BawiTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED65037A2CF89FD900423E8F /* Debug */,
@@ -617,7 +617,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED65037C2CF89FD900423E8F /* Build configuration list for PBXNativeTarget "IakadirUITests" */ = {
+		ED65037C2CF89FD900423E8F /* Build configuration list for PBXNativeTarget "BawiUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED65037D2CF89FD900423E8F /* Debug */,
