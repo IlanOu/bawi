@@ -26,6 +26,42 @@ class CookingViewModel: ObservableObject {
     }
   }
   
+  func getPrompt() -> String {
+    // Construction du contexte initial
+    var prompt = "Je voudrais une recette de cuisine avec les ingrédients suivants :\n"
+    
+    // Ajout des ingrédients sélectionnés
+    let ingredientsList = selectedFoods
+      .filter { $0.quantity > 0 }
+      .map { "- \($0.name) (\($0.quantity) \($0.quantity > 1 ? "unités" : "unité"))" }
+      .joined(separator: "\n")
+    
+    prompt += ingredientsList
+    
+    // Ajout des contraintes et filtres
+    prompt += "\n\nContraintes supplémentaires :"
+    prompt += "\n- Pour \(filters.numberOfPeople) \(filters.numberOfPeople > 1 ? "personnes" : "personne")"
+    
+    if filters.isVegetarian {
+      prompt += "\n- Recette végétarienne"
+    }
+    
+    if filters.isGlutenFree {
+      prompt += "\n- Sans gluten"
+    }
+    
+    // Instructions spécifiques pour le format de réponse
+    prompt += "\n\nMerci de me donner :"
+    prompt += "\n1. Le nom de la recette"
+    prompt += "\n2. Le temps de préparation"
+    prompt += "\n3. La liste complète des ingrédients avec leurs quantités"
+    prompt += "\n4. Les étapes de préparation numérotées"
+    prompt += "\n5. Quelques conseils de préparation si nécessaire"
+    
+    return prompt
+  }
+  
+  
   func incrementQuantity(of ingredient: Ingredient) {
     if let index = selectedFoods.firstIndex(where: { $0.id == ingredient.id }) {
       selectedFoods[index].quantity += 1
@@ -40,10 +76,3 @@ class CookingViewModel: ObservableObject {
     }
   }
 }
-
-/*
-struct FoodDetails {
-  var quantity: Int
-  var additionalInfo: [String: Any] = [:] // Permet d'ajouter des données supplémentaires
-}
-*/

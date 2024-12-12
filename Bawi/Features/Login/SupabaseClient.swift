@@ -7,15 +7,10 @@ class SupabaseClientAuth {
   let client: SupabaseClient
   
   private init() {
-
-    
     guard let supabaseUrl = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String,
           let supabaseAnonKey = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String else {
       fatalError("⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées.")
     }
-    
-    print("Supabase URL: \(supabaseUrl)")
-    print("Supabase Anon Key: \(supabaseAnonKey)")
     
     self.client = SupabaseClient(
       supabaseURL: URL(string: "https://\(supabaseUrl).supabase.co")!,

@@ -122,8 +122,6 @@ struct HomeView: View {
             .padding(.horizontal)
         }
     }
-
-
 }
 
 struct ProBadge: View {

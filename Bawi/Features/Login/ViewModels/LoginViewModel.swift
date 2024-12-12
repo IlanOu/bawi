@@ -6,7 +6,7 @@ class LoginViewModel: ObservableObject {
   @Published var password = ""
   @Published var isLoading = false
   @Published var error: String?
-  @Published var isLoginSuccessful = false  // Nouvelle variable pour l'état de la connexion réussie
+  @Published var isLoginSuccessful = false
   
   private let authService: AuthenticationServiceProtocol
   
@@ -14,22 +14,21 @@ class LoginViewModel: ObservableObject {
     self.authService = authService
   }
   
-  func login() {
-    Task {
-      isLoading = true
-      error = nil
-      isLoginSuccessful = false  // Réinitialiser l'état de la connexion réussie à chaque tentative
-      
-      do {
-        let user = try await authService.login(email: email, password: password)
-        print("Logged in user: \(user)")
-        // Si la connexion est réussie, on met à jour l'état
-        isLoginSuccessful = true
-      } catch {
-        self.error = error.localizedDescription
-      }
-      
-      isLoading = false
+  func attemptLogin() async {
+    guard !isLoading else { return }  // Évite les tentatives multiples
+    
+    isLoading = true
+    error = nil
+    
+    do {
+      let user = try await authService.login(email: email, password: password)
+      print("Logged in user: \(user)")
+      isLoginSuccessful = true
+    } catch {
+      self.error = error.localizedDescription
+      isLoginSuccessful = false
     }
+    
+    isLoading = false
   }
 }

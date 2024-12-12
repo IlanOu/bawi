@@ -3,7 +3,7 @@ import SwiftUI
 struct SignupView: View {
   @StateObject private var viewModel = SignupViewModel()
   @Binding var isSignupPresented: Bool
-  @Binding var isLoggedIn: Bool  // Passer l'état de connexion à la vue
+  @Binding var isLoggedIn: Bool
   
   var body: some View {
     VStack(spacing: 20) {
@@ -26,8 +26,8 @@ struct SignupView: View {
         Task {
           await viewModel.signup()
           if viewModel.isSignupSuccessful {
-            isLoggedIn = true  // Mettre isLoggedIn à true après une inscription réussie
-            isSignupPresented = false  // Fermer le sheet
+            isLoggedIn = true
+            isSignupPresented = false
           }
         }
       }) {

@@ -13,7 +13,7 @@ struct CustomButton: View {
     var foregroundColor: Color = Color("text")
     
     var body: some View {
-        Text(title) // Texte du bouton
+        Text(title)
             .fontWeight(.bold)
             .font(.title3)
             .foregroundColor(foregroundColor)
