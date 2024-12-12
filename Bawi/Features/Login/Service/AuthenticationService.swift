@@ -5,16 +5,14 @@ class AuthenticationService: AuthenticationServiceProtocol {
   
   private let client = SupabaseClientAuth.shared.client
   
+  
   func login(email: String, password: String) async throws -> (User, String) {
     do {
       let authResponse = try await self.client.auth.signIn(email: email, password: password)
       
       let user = authResponse.user
-      let email: String? = user.email
       let accessToken = authResponse.accessToken
-      
-      print("Access Token : \(accessToken)")
-      
+            
       return (User(id: user.id, email: user.email ?? ""), accessToken)
       
     } catch {

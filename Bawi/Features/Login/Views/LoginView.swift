@@ -51,7 +51,6 @@ struct LoginView: View {
     .onChange(of: viewModel.isLoginSuccessful) { success in
       if success {
         isLoggedIn = true
-        print("Tu es loggé !")
       }
     }
     .padding()

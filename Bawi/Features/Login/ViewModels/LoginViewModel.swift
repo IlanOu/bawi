@@ -7,6 +7,7 @@ class LoginViewModel: ObservableObject {
   @Published var isLoading = false
   @Published var error: String?
   @Published var isLoginSuccessful = false
+  @Published var token: String = ""
   
   private let authService: AuthenticationServiceProtocol
   
@@ -15,14 +16,13 @@ class LoginViewModel: ObservableObject {
   }
   
   func attemptLogin() async {
-    guard !isLoading else { return }  // Évite les tentatives multiples
+    guard !isLoading else { return }
     
     isLoading = true
     error = nil
     
     do {
-      let user = try await authService.login(email: email, password: password)
-      print("Logged in user: \(user)")
+      let (user, token) = try await authService.login(email: email, password: password)
       isLoginSuccessful = true
     } catch {
       self.error = error.localizedDescription
