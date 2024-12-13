@@ -77,13 +77,6 @@ struct SignupView: View {
               .background(Color.white.opacity(0.15))
               .cornerRadius(12)
               
-              //SecureField("Password", text: $viewModel.password)
-              //    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-              
-              
-              // secureField("Confirm Password", text: $viewModel.confirmPassword)
-              //    .textFieldStyle(RoundedBorderTextFieldStyle())
 
               
               // Password field
