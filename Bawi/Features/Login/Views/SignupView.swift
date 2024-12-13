@@ -33,15 +33,11 @@ struct SignupView: View {
                   .foregroundColor(.white)
                   .padding(.top, 20)
               
-              HStack(spacing: 4) {
-                  Text("Ça va être sympa !")
-                      .foregroundColor(.white.opacity(0.8))
-                  Button("Inscris-toi !") {
-                      isSignupPresented = true
-                  }
-                  .foregroundColor(Color("secondary"))
-              }
-              .padding(.bottom, 20)
+              
+              Text("Ça va être sympa !")
+                  .foregroundColor(.white.opacity(0.8))
+                  .padding(.bottom, 20)
+              
               
               // Email field
               HStack {
@@ -123,12 +119,7 @@ struct SignupView: View {
                       }
                   }
               }) {
-                  Text("Sign Up")
-                      .frame(maxWidth: .infinity)
-                      .padding()
-                      .background(Color.green)
-                      .foregroundColor(.white)
-                      .cornerRadius(10)
+                  CustomButton(title: "Je m'inscris !")
               }
               .disabled(viewModel.isLoading)
 
