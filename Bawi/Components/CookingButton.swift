@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct CookingButton: View {
-  @Binding var isLoading: Bool
-  @EnvironmentObject var discussionManager: DiscussionManager
-  var cookingViewModel: CookingViewModel
-  @State private var apiResponse: String = ""
-  @State private var showResultView: Bool = false
-  @State private var savedDiscussions: [String] = []
+      @Binding var isLoading: Bool
+      @EnvironmentObject var discussionManager: DiscussionManager
+      var cookingViewModel: CookingViewModel
+      @State private var apiResponse: String = ""
+      @State private var showResultView: Bool = false
+      @State private var savedDiscussions: [String] = []
   
+    private let model: String = "gpt-4o-mini"
+    
   var body: some View {
       VStack {
         Button(action: {
@@ -52,16 +54,14 @@ struct CookingButton: View {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(session.accessToken)", forHTTPHeaderField: "Authorization")
-        
-        print("Il y'a une image ? -> \(String(describing: cookingViewModel.selectedImage))")
-        
+                
         if let image = cookingViewModel.selectedImage {
             let prompt = cookingViewModel.getPrompt()
             let imageData = image.jpegData(compressionQuality: 0.8)
             let base64Image = imageData?.base64EncodedString() ?? ""
             
             let body: [String: Any] = [
-                "model": "gpt-4o",
+                "model": model,
                 "messages": [
                     [
                         "role": "user",
@@ -79,7 +79,6 @@ struct CookingButton: View {
                         ]
                     ]
                 ],
-                "max_tokens": 300
             ]
 
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
@@ -88,14 +87,13 @@ struct CookingButton: View {
             // Cas où il n'y a pas d'image
             let prompt = cookingViewModel.getPrompt()
             let body: [String: Any] = [
-                "model": "gpt-4o",
+                "model": model,
                 "messages": [
                     [
                         "role": "user",
                         "content": prompt
                     ]
-                ],
-                "max_tokens": 300
+                ]
             ]
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")

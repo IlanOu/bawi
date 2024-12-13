@@ -51,9 +51,12 @@ class CookingViewModel: ObservableObject {
             if filters.isGlutenFree {
                 prompt += "\n- Sans gluten"
             }
+            if !filters.haveFurnace {
+                prompt += "\n- Sans utiliser de four"
+            }
 
             // Instructions finales
-            prompt += "\n\nCommence directement à répondre en donnant la liste d'ingrédients basée sur l'image. Pas besoin de formule de politesse."
+            prompt += "\n\nCommence directement à répondre en donnant la liste d'ingrédients basée sur l'image. Pas besoin de formule de politesse. Commence par 'Je vois que vous avez les ingrédients suivants :'"
             return prompt
         }
 
@@ -78,6 +81,9 @@ class CookingViewModel: ObservableObject {
         
         if filters.isGlutenFree {
             prompt += "\n- Sans gluten"
+        }
+        if !filters.haveFurnace {
+            prompt += "\n- Sans utiliser de four"
         }
         
         // Instructions spécifiques pour le format de réponse
