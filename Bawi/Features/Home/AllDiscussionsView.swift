@@ -16,20 +16,37 @@ struct AllDiscussionsView: View {
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                List(discussionManager.discussions.reversed(), id: \.self) { discussion in
-                    NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
+                List {
+                    ForEach(discussionManager.discussions.reversed(), id: \.self) { discussion in
                         HStack {
-                            Circle()
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(width: 40, height: 40)
-                                .overlay(
-                                    Image(systemName: "waveform")
-                                        .foregroundColor(.white)
-                                )
+                            NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
+                                HStack {
+                                    Circle()
+                                        .fill(Color.gray.opacity(0.3))
+                                        .frame(width: 40, height: 40)
+                                        .overlay(
+                                            Image(systemName: "waveform")
+                                                .foregroundColor(.white)
+                                        )
 
-                            Text(discussion)
-                                .lineLimit(1)
-                                .foregroundColor(.primary)
+                                    Text(discussion)
+                                        .lineLimit(1)
+                                        .foregroundColor(.primary)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            Menu {
+                                Button(action: {
+                                    discussionManager.removeDiscussion(discussion)
+                                }) {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
+                            } label: {
+                                Image(systemName: "ellipsis")
+                                    .foregroundColor(.gray)
+                            }
                         }
                         .padding(.vertical, 4)
                     }

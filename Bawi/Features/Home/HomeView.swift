@@ -122,31 +122,43 @@ struct HomeView: View {
         }
         
         // Affichage des 3 dernières discussions
-        ForEach(discussionManager.discussions.reversed().prefix(3), id: \.self) { discussion in
-          NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
-            HStack(spacing: 12) {
-              Circle()
-                .fill(Color.gray.opacity(0.3))
-                .frame(width: 40, height: 40)
-                .overlay(
-                  Image(systemName: "waveform")
-                    .foregroundColor(.white)
-                )
-              
-              Text(discussion)
-                .foregroundColor(.white)
-                .lineLimit(1)
-              
-              Spacer()
-              
-              Image(systemName: "ellipsis")
-                .foregroundColor(.gray)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(12)
+          ForEach(discussionManager.discussions.reversed().prefix(3), id: \.self) { discussion in
+              HStack(spacing: 12) {
+                  NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
+                      HStack {
+                          Circle()
+                              .fill(Color.gray.opacity(0.3))
+                              .frame(width: 40, height: 40)
+                              .overlay(
+                                  Image(systemName: "waveform")
+                                      .foregroundColor(.white)
+                              )
+                          
+                          Text(discussion)
+                              .foregroundColor(.white)
+                              .lineLimit(1)
+                          
+                          Spacer()
+                      }
+                  }
+                  
+                  Menu {
+                      Button(action: {
+                          discussionManager.removeDiscussion(discussion)
+                      }) {
+                          Label("Supprimer", systemImage: "trash")
+                      }
+                  } label: {
+                      Image(systemName: "ellipsis")
+                          .foregroundColor(.gray)
+                  }
+              }
+              .padding()
+              .background(Color.gray.opacity(0.2))
+              .cornerRadius(12)
           }
-        }
+          
+          
       }
       .padding(.horizontal)
     }

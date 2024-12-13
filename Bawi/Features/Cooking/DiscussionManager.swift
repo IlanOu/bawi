@@ -22,7 +22,10 @@ class DiscussionManager: ObservableObject {
         discussions = UserDefaults.standard.stringArray(forKey: "SavedDiscussions") ?? []
     }
   
-    func removeDiscussion(at offsets: IndexSet) {
-      discussions.remove(atOffsets: offsets)
+    func removeDiscussion(_ discussion: String) {
+        if let index = discussions.firstIndex(of: discussion) {
+            discussions.remove(at: index)
+            saveDiscussions() // N'oubliez pas de sauvegarder après la suppression
+        }
     }
 }
