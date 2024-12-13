@@ -34,7 +34,7 @@ struct WelcomeView: View {
                     
                     
                     // Logo
-                    Image("ramen")
+                    Image("pizza")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(.white)
