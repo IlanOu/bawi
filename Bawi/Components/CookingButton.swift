@@ -57,10 +57,9 @@ struct CookingButton: View {
         
         if let image = cookingViewModel.selectedImage {
             let prompt = cookingViewModel.getPrompt()
-
             let imageData = image.jpegData(compressionQuality: 0.8)
             let base64Image = imageData?.base64EncodedString() ?? ""
-
+            
             let body: [String: Any] = [
                 "model": "gpt-4o",
                 "messages": [
@@ -84,15 +83,22 @@ struct CookingButton: View {
             ]
 
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
-            
-            
-        } else {
-            // Cas où il n'y a pas d'image, envoie uniquement un prompt JSON
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
+        } else {
+            // Cas où il n'y a pas d'image
             let prompt = cookingViewModel.getPrompt()
-            let body = ["query": prompt, "model": "gpt-4o"]
+            let body: [String: Any] = [
+                "model": "gpt-4o",
+                "messages": [
+                    [
+                        "role": "user",
+                        "content": prompt
+                    ]
+                ],
+                "max_tokens": 300
+            ]
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
         let (data, _) = try await URLSession.shared.data(for: request)
