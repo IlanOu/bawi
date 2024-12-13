@@ -16,7 +16,7 @@ struct AllDiscussionsView: View {
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                List(discussionManager.discussions, id: \.self) { discussion in
+                List(discussionManager.discussions.reversed(), id: \.self) { discussion in
                     NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
                         HStack {
                             Circle()

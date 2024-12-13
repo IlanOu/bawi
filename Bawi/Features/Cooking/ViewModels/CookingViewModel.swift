@@ -1,80 +1,109 @@
 import SwiftUI
 
 class CookingViewModel: ObservableObject {
-  @Published var selectedFoods: [Ingredient] = sampleIngredients
-  @Published var filters: Filters = Filters()
-  @Published var selectedImage: UIImage? = nil
-  
-  func logData() {
-    print("📝 Données enregistrées :")
+    @Published var selectedFoods: [Ingredient] = sampleIngredients
+    @Published var filters: Filters = Filters()
+    
+    @Published var selectedImage: UIImage? = nil
+    @Published var isPhoto: Bool = false
+    @Published var showImagePicker: Bool = false
 
-    print("Quantité de personnes : \(filters.numberOfPeople)")
+    func logData() {
+        print("📝 Données enregistrées :")
 
-    
-    print("  - Aliments sélectionnés :")
-    for ingredient in selectedFoods {
-      print("    • \(ingredient.name): Quantité: \(ingredient.quantity), Autres données: \(ingredient.image)")
+        print("Quantité de personnes : \(filters.numberOfPeople)")
+
+
+        print("  - Aliments sélectionnés :")
+        for ingredient in selectedFoods {
+            print("    • \(ingredient.name): Quantité: \(ingredient.quantity), Autres données: \(ingredient.image)")
+        }
+
+        print("  - Allergies (Végétarien) : \(filters.isVegetarian)")
+        print("  - Allergies (Sans gluten) : \(filters.isGlutenFree)")
+
+        if let _ = selectedImage {
+            print("  - Une image a été sélectionnée.")
+        } else {
+            print("  - Pas d'image sélectionnée.")
+        }
     }
-    
-    print("  - Allergies (Végétarien) : \(filters.isVegetarian)")
-    print("  - Allergies (Sans gluten) : \(filters.isGlutenFree)")
-    
-    if let _ = selectedImage {
-      print("  - Une image a été sélectionnée.")
-    } else {
-      print("  - Pas d'image sélectionnée.")
-    }
-  }
   
-  func getPrompt() -> String {
-    // Construction du contexte initial
-    var prompt = "Je voudrais une recette de cuisine avec les ingrédients suivants :\n"
-    
-    // Ajout des ingrédients sélectionnés
-    let ingredientsList = selectedFoods
-      .filter { $0.quantity > 0 }
-      .map { "- \($0.name) (\($0.quantity) \($0.quantity > 1 ? "unités" : "unité"))" }
-      .joined(separator: "\n")
-    
-    prompt += ingredientsList
-    
-    // Ajout des contraintes et filtres
-    prompt += "\n\nContraintes supplémentaires :"
-    prompt += "\n- Pour \(filters.numberOfPeople) \(filters.numberOfPeople > 1 ? "personnes" : "personne")"
-    
-    if filters.isVegetarian {
-      prompt += "\n- Recette végétarienne"
+    func getPrompt() -> String {
+        // Si une image est sélectionnée
+        if let _ = selectedImage {
+            var prompt = """
+            J'ai une image d'ingrédients. Merci de me donner :
+            1. Les ingrédients que tu vois dans une liste (avec les quantités)
+            2. Le nom de la recette
+            3. Le temps de préparation
+            4. La liste complète des ingrédients avec leurs quantités
+            5. Les étapes de préparation numérotées
+            6. Quelques conseils de préparation si nécessaire
+            """
+
+            // Ajout des contraintes
+            prompt += "\n\nContraintes supplémentaires :"
+            prompt += "\n- Pour \(filters.numberOfPeople) \(filters.numberOfPeople > 1 ? "personnes" : "personne")"
+            if filters.isVegetarian {
+                prompt += "\n- Recette végétarienne"
+            }
+            if filters.isGlutenFree {
+                prompt += "\n- Sans gluten"
+            }
+
+            // Instructions finales
+            prompt += "\n\nCommence directement à répondre en donnant la liste d'ingrédients basée sur l'image. Pas besoin de formule de politesse."
+            return prompt
+        }
+
+        // Construction du contexte initial si pas d'image
+        var prompt = "Je voudrais une recette de cuisine avec les ingrédients suivants :\n"
+        
+        // Ajout des ingrédients sélectionnés
+        let ingredientsList = selectedFoods
+            .filter { $0.quantity > 0 }
+            .map { "- \($0.name) (\($0.quantity) \($0.quantity > 1 ? "unités" : "unité"))" }
+            .joined(separator: "\n")
+        
+        prompt += ingredientsList
+        
+        // Ajout des contraintes et filtres
+        prompt += "\n\nContraintes supplémentaires :"
+        prompt += "\n- Pour \(filters.numberOfPeople) \(filters.numberOfPeople > 1 ? "personnes" : "personne")"
+        
+        if filters.isVegetarian {
+            prompt += "\n- Recette végétarienne"
+        }
+        
+        if filters.isGlutenFree {
+            prompt += "\n- Sans gluten"
+        }
+        
+        // Instructions spécifiques pour le format de réponse
+        prompt += "\n\nMerci de me donner :"
+        prompt += "\n1. Le nom de la recette"
+        prompt += "\n2. Le temps de préparation"
+        prompt += "\n3. La liste complète des ingrédients avec leurs quantités"
+        prompt += "\n4. Les étapes de préparation numérotées"
+        prompt += "\n5. Quelques conseils de préparation si nécessaire"
+        
+        prompt += "\n\nCommence directement à répondre en donnant la recette. Pas besoin de formule de politesse."
+        
+        return prompt
     }
-    
-    if filters.isGlutenFree {
-      prompt += "\n- Sans gluten"
-    }
-    
-    // Instructions spécifiques pour le format de réponse
-    prompt += "\n\nMerci de me donner :"
-    prompt += "\n1. Le nom de la recette"
-    prompt += "\n2. Le temps de préparation"
-    prompt += "\n3. La liste complète des ingrédients avec leurs quantités"
-    prompt += "\n4. Les étapes de préparation numérotées"
-    prompt += "\n5. Quelques conseils de préparation si nécessaire"
-    
-    prompt += "\n\n Commence directement à répondre en donnant la recette."
-    
-    return prompt
-  }
   
-  
-  func incrementQuantity(of ingredient: Ingredient) {
-    if let index = selectedFoods.firstIndex(where: { $0.id == ingredient.id }) {
-      selectedFoods[index].quantity += 1
+    func incrementQuantity(of ingredient: Ingredient) {
+        if let index = selectedFoods.firstIndex(where: { $0.id == ingredient.id }) {
+            selectedFoods[index].quantity += 1
+        }
     }
-  }
-  
-  func decrementQuantity(of ingredient: Ingredient) {
-    if let index = selectedFoods.firstIndex(where: { $0.id == ingredient.id }) {
-      if selectedFoods[index].quantity > 0 {
-        selectedFoods[index].quantity -= 1
-      }
+
+    func decrementQuantity(of ingredient: Ingredient) {
+        if let index = selectedFoods.firstIndex(where: { $0.id == ingredient.id }) {
+            if selectedFoods[index].quantity > 0 {
+                selectedFoods[index].quantity -= 1
+            }
+        }
     }
-  }
 }

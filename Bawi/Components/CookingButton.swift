@@ -39,31 +39,68 @@ struct CookingButton: View {
       }
     }
   
-  func sendRequestToAPI() async throws -> String {
-    let prompt = cookingViewModel.getPrompt()
-    let client = SupabaseClientAuth.shared.client
-    
-    guard let supabaseUrl = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String,
-          let _ = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String else {
-      return "⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées."
-    }
-    
-    let session = try await client.auth.session
-    let urlString = "https://\(supabaseUrl).functions.supabase.co/openai"
-    let url = URL(string: urlString)!
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("Bearer \(session.accessToken)", forHTTPHeaderField: "Authorization")
-    
-    let body = ["query": prompt, "model": "gpt-4o-mini"]
-    request.httpBody = try JSONSerialization.data(withJSONObject: body)
-    
-    let (data, _) = try await URLSession.shared.data(for: request)
-    guard let response = String(data: data, encoding: .utf8) else {
-      throw NSError(domain: "ChatViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to decode response"])
-    }
+    func sendRequestToAPI() async throws -> String {
+        let client = SupabaseClientAuth.shared.client
+        guard let supabaseUrl = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String,
+              let _ = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String else {
+            return "⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées."
+        }
         
-    return response
-  }
+        let session = try await client.auth.session
+        let urlString = "https://\(supabaseUrl).functions.supabase.co/openai"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(session.accessToken)", forHTTPHeaderField: "Authorization")
+        
+        print("Il y'a une image ? -> \(String(describing: cookingViewModel.selectedImage))")
+        
+        if let image = cookingViewModel.selectedImage {
+            let prompt = cookingViewModel.getPrompt()
+
+            let imageData = image.jpegData(compressionQuality: 0.8)
+            let base64Image = imageData?.base64EncodedString() ?? ""
+
+            let body: [String: Any] = [
+                "model": "gpt-4o",
+                "messages": [
+                    [
+                        "role": "user",
+                        "content": [
+                            [
+                                "type": "text",
+                                "text": prompt
+                            ],
+                            [
+                                "type": "image_url",
+                                "image_url": [
+                                    "url": "data:image/jpeg;base64,\(base64Image)"
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "max_tokens": 300
+            ]
+
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            
+            
+        } else {
+            // Cas où il n'y a pas d'image, envoie uniquement un prompt JSON
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let prompt = cookingViewModel.getPrompt()
+            let body = ["query": prompt, "model": "gpt-4o"]
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        }
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        guard let response = String(data: data, encoding: .utf8) else {
+            throw NSError(domain: "CookingButton", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to decode response"])
+        }
+        
+        return response
+    }
+
 }

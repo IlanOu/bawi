@@ -122,7 +122,7 @@ struct HomeView: View {
         }
         
         // Affichage des 3 dernières discussions
-        ForEach(discussionManager.discussions.prefix(3), id: \.self) { discussion in
+        ForEach(discussionManager.discussions.reversed().prefix(3), id: \.self) { discussion in
           NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
             HStack(spacing: 12) {
               Circle()

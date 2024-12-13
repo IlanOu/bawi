@@ -1,17 +1,15 @@
 import SwiftUI
 
-// PhotoSelectionView.swift
 struct PhotoSelectionView: View {
-    @Binding var selectedImage: UIImage?
-    @Binding var showImagePicker: Bool
+    @EnvironmentObject var cookingViewModel: CookingViewModel
     
     var body: some View {
-        Button(action: { showImagePicker = true }) {
-            if let image = selectedImage {
+        Button(action: { cookingViewModel.showImagePicker = true }) {
+            if let image = cookingViewModel.selectedImage {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 300, height: 300)
                     .cornerRadius(8)
             } else {
                 VStack {
@@ -28,8 +26,8 @@ struct PhotoSelectionView: View {
                 }
             }
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(selectedImage: $selectedImage)
+        .sheet(isPresented: $cookingViewModel.showImagePicker) {
+            ImagePicker(selectedImage: $cookingViewModel.selectedImage)
         }
     }
 }

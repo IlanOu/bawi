@@ -14,11 +14,7 @@ struct CookingView: View {
       
       VStack {
         if selectedTab == 0 {
-          FridgeContentView(
-            isPhoto: $isPhoto,
-            selectedImage: $selectedImage,
-            showImagePicker: $showImagePicker
-          )
+          FridgeContentView()
         } else {
           FilterContentView(
             isLoading: $isLoading,
