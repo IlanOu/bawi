@@ -8,7 +8,6 @@ struct CookingButton: View {
       @State private var showResultView: Bool = false
       @State private var savedDiscussions: [String] = []
   
-    private let model: String = "gpt-4o-mini"
     
   var body: some View {
       VStack {
@@ -18,7 +17,9 @@ struct CookingButton: View {
           Task {
             do {
               apiResponse = try await sendRequestToAPI()
-              discussionManager.addDiscussion(apiResponse)
+              // discussionManager.addDiscussion(apiResponse)
+              discussionManager.addDiscussion(text: apiResponse, ingredients: cookingViewModel.selectedFoods)
+
               isLoading = false
             } catch {
               apiResponse = "Erreur : \(error.localizedDescription)"
@@ -32,7 +33,10 @@ struct CookingButton: View {
         
         // NavigationLink déclenchée dès que le bouton est pressé
         NavigationLink(
-          destination: MarkdownView(content: apiResponse, isLoading: $isLoading),
+            destination: MarkdownView(
+                content: apiResponse,
+                ingredients: cookingViewModel.selectedFoods,
+                isLoading: $isLoading),
           isActive: $showResultView
         ) {
           EmptyView()
@@ -61,7 +65,7 @@ struct CookingButton: View {
             let base64Image = imageData?.base64EncodedString() ?? ""
             
             let body: [String: Any] = [
-                "model": model,
+                "model": discussionManager.model,
                 "messages": [
                     [
                         "role": "user",
@@ -87,7 +91,7 @@ struct CookingButton: View {
             // Cas où il n'y a pas d'image
             let prompt = cookingViewModel.getPrompt()
             let body: [String: Any] = [
-                "model": model,
+                "model": discussionManager.model,
                 "messages": [
                     [
                         "role": "user",

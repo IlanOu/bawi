@@ -23,19 +23,19 @@ struct SignupView: View {
               Image("pizza")
                   .resizable()
                   .aspectRatio(contentMode: .fit)
-                  .foregroundColor(.white)
+                  .foregroundColor(Color("text"))
                   .frame(width: 100, height: 100)
               
               
               // Title
               Text("Aller, viens")
                   .font(.system(size: 36, weight: .bold))
-                  .foregroundColor(.white)
+                  .foregroundColor(Color("text"))
                   .padding(.top, 20)
               
               
               Text("Ça va être sympa !")
-                  .foregroundColor(.white.opacity(0.8))
+                  .foregroundColor(Color("text").opacity(0.8))
                   .padding(.bottom, 20)
               
               
@@ -44,7 +44,7 @@ struct SignupView: View {
                   Image(systemName: "envelope.fill")
                       .foregroundColor(Color("secondary"))
                   TextField("Email", text: $viewModel.email)
-                      .foregroundColor(.white)
+                      .foregroundColor(Color("text"))
                       .autocapitalization(.none)
                       .keyboardType(.emailAddress)
               }
@@ -64,7 +64,7 @@ struct SignupView: View {
                           SecureField("Password", text: $viewModel.password)
                       }
                   }
-                  .foregroundColor(.white)
+                  .foregroundColor(Color("text"))
                   
                   Button(action: {
                       isPasswordVisible.toggle()
@@ -90,7 +90,7 @@ struct SignupView: View {
                           SecureField("Password", text: $viewModel.confirmPassword)
                       }
                   }
-                  .foregroundColor(.white)
+                  .foregroundColor(Color("text"))
                   
                   Button(action: {
                       isPasswordVisible.toggle()

@@ -27,7 +27,7 @@ struct CookingView: View {
         TabBarView(selectedTab: $selectedTab)
       }
       .padding()
-      .foregroundStyle(.white)
+      .foregroundStyle(Color("text"))
     }
     .background(Color("primary"))
   }

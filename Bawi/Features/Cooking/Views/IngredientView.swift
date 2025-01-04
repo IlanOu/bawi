@@ -19,7 +19,7 @@ struct IngredientView: View {
             // Nom de l'ingrédient
             Text(ingredient.name)
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(Color("text"))
                 .lineLimit(1)
                 .truncationMode(.tail)
 
@@ -36,7 +36,7 @@ struct IngredientView: View {
                 Text("\(ingredient.quantity)")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("text"))
 
                 Button(action: onIncrement) {
                     Image(systemName: "plus")

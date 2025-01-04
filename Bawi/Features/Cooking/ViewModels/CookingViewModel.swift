@@ -33,11 +33,11 @@ class CookingViewModel: ObservableObject {
         // Si une image est sélectionnée
         if let _ = selectedImage {
             var prompt = """
-            J'ai une image d'ingrédients. Merci de me donner :
-            1. Les ingrédients que tu vois dans une liste (avec les quantités)
-            2. Le nom de la recette
+            J'ai une image d'ingrédients. Merci de me donner les informations suivantes dans cet ordre :
+            1. Le nom de la recette (sans markdown ou formatage, uniquement le titre brut, uniquement pour ce point, la suite peut être en markdown)
+            2. Les ingrédients que tu vois dans une liste (avec les quantités, en précisant que certains peuvent ne pas être utilisés)
             3. Le temps de préparation
-            4. La liste complète des ingrédients avec leurs quantités
+            4. La liste complète des ingrédients nécessaires avec leurs quantités (parmi les ingrédients visibles ou d'autres que tu peux suggérer)
             5. Les étapes de préparation numérotées
             6. Quelques conseils de préparation si nécessaire
             """
@@ -56,12 +56,12 @@ class CookingViewModel: ObservableObject {
             }
 
             // Instructions finales
-            prompt += "\n\nCommence directement à répondre en donnant la liste d'ingrédients basée sur l'image. Pas besoin de formule de politesse. Commence par 'Je vois que vous avez les ingrédients suivants :'"
+            prompt += "\n\nCommence directement à répondre en donnant les informations demandées. Pas besoin de formule de politesse. La première ligne de la réponse doit contenir uniquement le nom de la recette, sans aucun formatage. Pour le reste du texte, utilises le formatage en markdown (titres, graisses, italique, etc.). Note également que tous les ingrédients visibles ne doivent pas forcément être utilisés dans la recette."
             return prompt
         }
 
         // Construction du contexte initial si pas d'image
-        var prompt = "Je voudrais une recette de cuisine avec les ingrédients suivants :\n"
+        var prompt = "Je voudrais une recette de cuisine avec les ingrédients suivants (ils ne sont pas tous obligatoires dans la recette) :\n"
         
         // Ajout des ingrédients sélectionnés
         let ingredientsList = selectedFoods
@@ -87,17 +87,19 @@ class CookingViewModel: ObservableObject {
         }
         
         // Instructions spécifiques pour le format de réponse
-        prompt += "\n\nMerci de me donner :"
-        prompt += "\n1. Le nom de la recette"
+        prompt += "\n\nMerci de me donner les informations suivantes dans cet ordre :"
+        prompt += "\n1. Le nom de la recette (sans markdown ou formatage, uniquement le titre brut, uniquement pour ce point, la suite peut être en markdown)"
         prompt += "\n2. Le temps de préparation"
-        prompt += "\n3. La liste complète des ingrédients avec leurs quantités"
+        prompt += "\n3. La liste complète des ingrédients nécessaires avec leurs quantités (en précisant que tous les ingrédients listés ne sont pas forcément utilisés)"
         prompt += "\n4. Les étapes de préparation numérotées"
         prompt += "\n5. Quelques conseils de préparation si nécessaire"
         
-        prompt += "\n\nCommence directement à répondre en donnant la recette. Pas besoin de formule de politesse."
+        prompt += "\n\nCommence directement à répondre en donnant les informations demandées. Pas besoin de formule de politesse. La première ligne de la réponse doit contenir uniquement le nom de la recette, sans aucun formatage. Pour le reste du texte, utilises le formatage en markdown (titres, graisses, italique, etc.). Note également que tous les ingrédients visibles ne doivent pas forcément être utilisés dans la recette."
         
         return prompt
     }
+
+
   
     func incrementQuantity(of ingredient: Ingredient) {
         if let index = selectedFoods.firstIndex(where: { $0.id == ingredient.id }) {

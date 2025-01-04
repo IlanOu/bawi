@@ -48,20 +48,6 @@
 			);
 			target = ED6503512CF89FD800423E8F /* Bawi */;
 		};
-		ED85D0352D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				BaseConfig.xcconfig,
-			);
-			target = ED6503612CF89FD900423E8F /* BawiTests */;
-		};
-		ED85D0362D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				BaseConfig.xcconfig,
-			);
-			target = ED65036B2CF89FD900423E8F /* BawiUITests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -69,8 +55,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				ED85CFE92D09C5DE00ED39FC /* Exceptions for "Bawi" folder in "Bawi" target */,
-				ED85D0352D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiTests" target */,
-				ED85D0362D09D04900ED39FC /* Exceptions for "Bawi" folder in "BawiUITests" target */,
 			);
 			path = Bawi;
 			sourceTree = "<group>";

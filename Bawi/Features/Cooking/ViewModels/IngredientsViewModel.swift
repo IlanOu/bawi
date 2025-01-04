@@ -1,6 +1,6 @@
 import Foundation
 
-struct Ingredient: Identifiable, Equatable {
+struct Ingredient: Identifiable, Equatable, Codable, Hashable {
   let id = UUID()
   let name: String
   var quantity: Int

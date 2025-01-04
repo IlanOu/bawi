@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  Bawi
+//
+//  Created by Ilan Outhier on 02/01/2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SUPABASE_URL = ezbnbaqklvfakueppscb
+SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6Ym5iYXFrbHZmYWt1ZXBwc2NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5MTIwNDQsImV4cCI6MjA0OTQ4ODA0NH0.N0XPR2qqtO_4i1bLa1DDhcjI6Q4Of1fdyZOL4CR1aQI

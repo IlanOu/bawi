@@ -11,7 +11,7 @@ struct FoodListView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(Color("secondary"))
                 TextField("Rechercher un aliment...", text: $searchText)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("text"))
                     .autocapitalization(.none)
             }
             .padding()

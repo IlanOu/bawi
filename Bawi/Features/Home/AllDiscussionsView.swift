@@ -17,19 +17,26 @@ struct AllDiscussionsView: View {
                     .padding()
             } else {
                 List {
-                    ForEach(discussionManager.discussions.reversed(), id: \.self) { discussion in
+                    ForEach(discussionManager.discussions.reversed()) { discussion in
                         HStack {
-                            NavigationLink(destination: MarkdownView(content: discussion, isLoading: $isLoading)) {
+                            NavigationLink(
+                                destination: MarkdownView(
+                                    content: discussion.text,
+                                    ingredients: discussion.ingredients,
+                                    isLoading: $isLoading
+                                )
+                                .id(discussion.id)
+                            ) {
                                 HStack {
                                     Circle()
                                         .fill(Color.gray.opacity(0.3))
                                         .frame(width: 40, height: 40)
                                         .overlay(
                                             Image(systemName: "waveform")
-                                                .foregroundColor(.white)
+                                                .foregroundColor(Color("text"))
                                         )
 
-                                    Text(discussion)
+                                    Text(discussion.text)
                                         .lineLimit(1)
                                         .foregroundColor(.primary)
                                 }

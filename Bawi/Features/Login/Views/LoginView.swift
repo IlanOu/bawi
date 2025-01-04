@@ -21,19 +21,19 @@ struct LoginView: View {
                 Image("pizza")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("text"))
                     .frame(width: 100, height: 100)
                 
                 // Title
                 Text("Yo !")
                     .font(.system(size: 36, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("text"))
                     .padding(.top, 20)
                 
                 // Sign up text
                 HStack(spacing: 4) {
                     Text("T'as pas encore de compte !?")
-                        .foregroundColor(.white.opacity(0.8))
+                        .foregroundColor(Color("text").opacity(0.8))
                     Button("Inscris-toi !") {
                         isSignupPresented = true
                     }
@@ -46,7 +46,7 @@ struct LoginView: View {
                     Image(systemName: "envelope.fill")
                         .foregroundColor(Color("secondary"))
                     TextField("Email", text: $viewModel.email)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("text"))
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
                 }
@@ -65,7 +65,7 @@ struct LoginView: View {
                             SecureField("Password", text: $viewModel.password)
                         }
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("text"))
                     
                     Button(action: {
                         isPasswordVisible.toggle()
@@ -91,7 +91,7 @@ struct LoginView: View {
                 
                 if viewModel.isLoading {
                     ProgressView()
-                        .tint(.white)
+                        .tint(Color("text"))
                 }
                 
                 if let error = viewModel.error {
