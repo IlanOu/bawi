@@ -18,4 +18,9 @@ class SupabaseClientAuth {
     )
     
   }
+    
+    func signOut() async throws {
+        try await client.auth.signOut()
+        // Gérer la redirection ou mise à jour de l'UI ici
+    }
 }

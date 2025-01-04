@@ -43,7 +43,14 @@ struct HomeView: View {
                 // Menu Button
                 Menu {
                     Button(action: {
-                        // Action de déconnexion ici
+                        Task {
+                            do {
+                                try await SupabaseClientAuth.shared.signOut()
+                                // Rediriger vers la page de login par exemple
+                            } catch {
+                                
+                            }
+                        }
                     }) {
                         HStack {
                             Image(systemName: "rectangle.portrait.and.arrow.right")
