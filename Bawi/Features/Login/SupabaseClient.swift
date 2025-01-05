@@ -7,9 +7,9 @@ class SupabaseClientAuth {
   let client: SupabaseClient
   
   private init() {
-    guard let supabaseUrl = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String,
-          let supabaseAnonKey = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String else {
-      fatalError("⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées.")
+    guard let supabaseUrl = Config.supabaseUrl,
+          let supabaseAnonKey = Config.supabaseAnonKey else {
+        fatalError("⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées.")
     }
     
     self.client = SupabaseClient(
@@ -18,9 +18,4 @@ class SupabaseClientAuth {
     )
     
   }
-    
-    func signOut() async throws {
-        try await client.auth.signOut()
-        // Gérer la redirection ou mise à jour de l'UI ici
-    }
 }

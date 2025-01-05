@@ -1,17 +1,11 @@
-//
-//  LoginView.swift
-//  Bawi
-//
-//  Created by digital on 28/11/2024.
-//
-
 import SwiftUI
 
 struct WelcomeView: View {
+    @EnvironmentObject var authState: AuthState
+    
     var body: some View {
         NavigationView {
             ZStack {
-                
                 Image("Group 1")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -31,7 +25,6 @@ struct WelcomeView: View {
                         .textCase(.uppercase)
                     
                     Spacer()
-                    
                     
                     // Logo
                     Image("pizza")
@@ -53,7 +46,6 @@ struct WelcomeView: View {
                     
                     Spacer()
                     
-                    
                     NavigationLink(
                         destination: LoginView(),
                         label: {
@@ -67,9 +59,6 @@ struct WelcomeView: View {
             }
             .background(Color("primary"))
         }
+        
     }
-}
-
-#Preview {
-    WelcomeView()
 }

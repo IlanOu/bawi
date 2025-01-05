@@ -47,9 +47,10 @@ struct CookingButton: View {
   
     func sendRequestToAPI() async throws -> String {
         let client = SupabaseClientAuth.shared.client
-        guard let supabaseUrl = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String,
-              let _ = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String else {
-            return "⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées."
+        
+        guard let supabaseUrl = Config.supabaseUrl,
+              let supabaseAnonKey = Config.supabaseAnonKey else {
+            fatalError("⚠️ Les clés Supabase (URL ou Anon Key) ne sont pas configurées.")
         }
         
         let session = try await client.auth.session

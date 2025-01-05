@@ -1,17 +1,13 @@
-//
-//  BawyApp.swift
-//  Bawi
-//
-//  Created by digital on 28/11/2024.
-//
-
 import SwiftUI
 
 @main
 struct BawiApp: App {
+    @StateObject private var authState = AuthState()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(authState)
         }
     }
 }

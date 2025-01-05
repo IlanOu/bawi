@@ -1,17 +1,23 @@
-//
-//  ContentView.swift
-//  Bawi
-//
-//  Created by digital on 28/11/2024.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authState: AuthState
+
     var body: some View {
-        WelcomeView()
+        VStack {
+            if authState.isLoggedIn {
+                HomeView()
+            } else {
+                WelcomeView()
+            }
+        }
+        .onChange(of: authState.isLoggedIn) { newValue in
+            // Cette closure sera appelée à chaque fois que isLoggedIn change
+            print("isLoggedIn a changé, nouvelle valeur : \(newValue)")
+        }
     }
 }
+
 
 #Preview {
     ContentView()

@@ -1,6 +1,8 @@
 import Foundation
 
 protocol AuthenticationServiceProtocol {
-  func login(email: String, password: String) async throws -> (User, String)
-  func signup(email: String, password: String) async throws -> (User, String)
+    func login(email: String, password: String) async throws -> (User, String)
+    func signup(email: String, password: String) async throws -> (User, String)
+    func logout() async throws
+    func isAuthenticated() async -> Bool
 }

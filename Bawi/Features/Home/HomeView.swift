@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var cookingViewModel = CookingViewModel()
     @StateObject private var discussionManager = DiscussionManager.shared
+    @StateObject private var viewModel = HomeViewModel()
     @State private var isLoading = false
     @State private var apiResponse: String = ""
 
@@ -45,10 +46,11 @@ struct HomeView: View {
                     Button(action: {
                         Task {
                             do {
-                                try await SupabaseClientAuth.shared.signOut()
-                                // Rediriger vers la page de login par exemple
-                            } catch {
-                                
+                                await viewModel.logOut()
+                                DispatchQueue.main.async {
+                                    print("Déconnexion réussie, mise à jour de l'interface")
+                                    
+                                }
                             }
                         }
                     }) {

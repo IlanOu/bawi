@@ -1,41 +1,49 @@
 import Combine
+import SwiftUI
 import Foundation
 
-
 class SignupViewModel: ObservableObject {
-  @Published var email = ""
-  @Published var password = ""
-  @Published var confirmPassword = ""
-  @Published var username = ""
-  @Published var isLoading = false
-  @Published var error: String?
-  @Published var isSignupSuccessful: Bool = false
-
-  
-  private let authService: AuthenticationServiceProtocol
-  
-  init(authService: AuthenticationServiceProtocol = AuthenticationService()) {
-    self.authService = authService
-  }
-  
-  func signup() async {
-    guard password == confirmPassword else {
-      error = "Passwords do not match"
-      isLoading = false
-      return
+    @Published var email = ""
+    @Published var password = ""
+    @Published var confirmPassword = ""
+    @Published var username = ""
+    @Published var isLoading = false
+    @Published var error: String?
+    @Published var isSignupSuccessful: Bool = false
+    @Published var authState: AuthState
+    
+    init(authState: AuthState) {
+        self.authState = authState
     }
     
-    isLoading = true
-    
-    do {
-      try await authService.signup(email: email, password: password)
-      isSignupSuccessful = true
-      // Mettre à jour l'état pour indiquer que l'inscription a réussi
-      isLoading = false
-    } catch {
-      self.error = error.localizedDescription
-      isLoading = false
+    func signup() async {
+        guard password == confirmPassword else {
+            // Assurez-vous que ces mises à jour se font sur le thread principal
+            DispatchQueue.main.async {
+                self.error = "Passwords do not match"
+                self.isLoading = false
+            }
+            return
+        }
+        
+        // Assurez-vous que ces mises à jour se font sur le thread principal
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        do {
+            try await authState.signup(email: email, password: password)
+            // Assurez-vous que ces mises à jour se font sur le thread principal
+            DispatchQueue.main.async {
+                self.isSignupSuccessful = true
+                self.isLoading = false
+            }
+        } catch {
+            // Assurez-vous que ces mises à jour se font sur le thread principal
+            DispatchQueue.main.async {
+                self.error = error.localizedDescription
+                self.isLoading = false
+            }
+        }
     }
-  }
-
 }
