@@ -114,7 +114,7 @@ struct LoginView: View {
             .navigationBarHidden(true)
             .background(
                 NavigationLink(
-                    destination: HomeView(),
+                    destination: HomeView(authState: authState),
                     isActive: .constant(authState.isLoggedIn),
                     label: { EmptyView() }
                 )

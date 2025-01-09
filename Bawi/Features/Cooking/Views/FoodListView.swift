@@ -3,7 +3,7 @@ import SwiftUI
 struct FoodListView: View {
     @EnvironmentObject var cookingViewModel: CookingViewModel
     @State private var searchText: String = "" // Propriété pour le texte de recherche
-
+    
     var body: some View {
         VStack {
             // Barre de recherche stylée
@@ -18,7 +18,7 @@ struct FoodListView: View {
             .background(Color.white.opacity(0.15))
             .cornerRadius(12)
             .padding(.horizontal)
-
+            
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
                     // Filtrer les ingrédients en fonction du texte de recherche
@@ -45,7 +45,7 @@ struct FoodListView: View {
             }
         }
     }
-
+    
     // Propriété calculée pour filtrer les ingrédients
     private var filteredIngredients: [Ingredient] {
         if searchText.isEmpty {
@@ -56,8 +56,4 @@ struct FoodListView: View {
             }
         }
     }
-}
-
-#Preview {
-    HomeView()
 }

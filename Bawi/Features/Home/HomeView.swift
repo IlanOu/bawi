@@ -3,10 +3,17 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var cookingViewModel = CookingViewModel()
     @StateObject private var discussionManager = DiscussionManager.shared
-    @StateObject private var viewModel = HomeViewModel()
+    
+    @EnvironmentObject var authState: AuthState
+    @StateObject private var viewModel: HomeViewModel
+    
     @State private var isLoading = false
     @State private var apiResponse: String = ""
 
+    init(authState: AuthState) {
+        _viewModel = StateObject(wrappedValue: HomeViewModel(authState: authState))
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {

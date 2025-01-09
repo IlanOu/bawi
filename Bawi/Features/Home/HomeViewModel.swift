@@ -3,12 +3,16 @@ import SwiftUI
 @MainActor
 class HomeViewModel: ObservableObject {
     
-    @EnvironmentObject var authState: AuthState
+    @Published var authState: AuthState
+    
+    init(authState: AuthState) {
+        self.authState = authState
+    }
     
     @MainActor
     func logOut() async{
         do {
-            try await AuthState().logout()
+            try await authState.logout()
         } catch {
             print("error -> logout")
         }
